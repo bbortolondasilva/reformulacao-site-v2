@@ -16,7 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from siteweb import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("", views.home, name="home"),
+    path("produtos/", views.produtos, name="produtos"),
+    path("sobre/", views.sobre, name="sobre"),
+    path("contato/", views.contato, name="contato"),
+    path("atuacao/", views.atuacao, name="atuacao"),
+    path("downloads/", views.downloads, name="downloads"),
+    path("downloads/obrigado/", views.downloads_obrigado, name="downloads_obrigado"),
 ]
