@@ -1,0 +1,382 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoftControl</title>
+
+    <!-- CSS Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <!-- Ícones Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <!-- CSS Próprio -->
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}">
+
+    <!-- Link Favicon -->
+    <link rel="shortcut icon" href="{% static 'assets/imagens/empresa/logo/favicon.png' %}" type="image/x-icon">
+
+    <style>
+        @media screen and (max-width: 768px) {
+            .banner{
+                background-image: url("{% static 'assets/imagens/empresa/banner/banner-completo-pq.png' %}");
+            }
+        }
+        
+        @media screen and (min-width: 768px) {
+            .banner {
+                background-image: url("{% static 'assets/imagens/empresa/banner/banner-completo.png' %}");
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="shadows">
+        <nav class="navbar navbar-expand-lg bg-white">
+            <div class="container-fluid">
+                <a class="navbar-brand m-0" href="{% url 'home' %}">
+                    <img src="{% static 'assets/imagens/empresa/logo/logo-icone.png' %}" alt="Ícone SoftControl Brasil" id="icone-softcontrol">
+
+                    <img src="{% static 'assets/imagens/empresa/logo/logo-soft-texto-header.png' %}" alt="Logo SoftControl Brasil" id="logo-softcontrol">
+                </a>
+
+                <button class="navbar-toggler m-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-link active" aria-current="page" href="#">Início</a>
+                        <a class="nav-link" href="{% url 'produtos' %}">Produtos</a>
+                        <a class="nav-link" href="{% url 'downloads' %}">Downloads</a>
+                        <a class="nav-link" href="{% url 'sobre' %}">Sobre</a>
+                        <a class="nav-link" href="{% url 'contato' %}">Contato</a>
+                        <a class="nav-link" href="{% url 'atuacao' %}">Atuação</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- Fim header -->
+
+    <div class="banner">
+        <!-- Banner SoftControl Brasil -->
+    </div>
+    <!-- Fim div banner -->
+
+    <main>
+        <section id="sobre" class="shadow mb-3 py-5">
+
+            <!--Coloquei um espaçamento ali pra ficar mais bonito-->
+            <h2 class="fw-bold display-6">Quem somos nós?</h2>
+            <p class="mb-5">Somos a SoftControl Brasil Sistemas de Gestão, uma empresa familiar construída sobre três pilares fundamentais</p>
+            
+            
+            <section class="container py-2">
+                <!-- CARD 1 -->
+                <div class="card card-pilar mb-4 border-0" style="overflow: hidden;">
+                    <div class="row g-0 align-items-center">
+
+                        <div class="col-12 col-md-4">
+                            <img src="{% static 'assets/imagens/pilares/pilar1.png' %}"
+                                class="img-fluid imagem-pilar"
+                                alt="Primeiro Pilar"
+                                style="height: 300px;">
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="card-body p-4">
+
+                                <span class="badge bg-success mb-3 px-3 py-2">
+                                    Primeiro Pilar
+                                </span>
+
+                                <h3 class="fw-bold mb-3">
+                                    Crescimento junto aos clientes
+                                </h3>
+
+                                <p class="text-muted mb-0">
+                                    Crescemos junto com nossos clientes, transformando
+                                    confiança em resultados e inovação contínua.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            <!-- CARD 2 -->
+                <div class="card card-pilar mb-4 border-0" style="overflow: hidden;">
+                    <div class="row g-0 align-items-center">
+
+                        <div class="col-12 col-md-4">
+                            <img src="{% static 'assets/imagens/pilares/pilar2.png' %}"
+                                class="img-fluid imagem-pilar"
+                                alt="Segundo Pilar"
+                                style="height: 301px;">
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="card-body p-4">
+
+                                <span class="badge bg-success mb-3 px-3 py-2">
+                                    Segundo Pilar
+                                </span>
+
+                                <h3 class="fw-bold mb-3">
+                                    Tecnologia com atendimento humano
+                                </h3>
+
+                                <p class="text-muted mb-0">
+                                    Unimos tecnologia e atendimento humano para oferecer
+                                    suporte ágil, eficiente e sempre presente.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 3 -->
+                <div class="card card-pilar border-0" style="overflow: hidden;">
+                    <div class="row g-0 align-items-center">
+
+                        <div class="col-12 col-md-4">
+                            <img src="{% static 'assets/imagens/pilares/pilar3.png' %}"
+                                class="img-fluid imagem-pilar"
+                                alt="Terceiro Pilar"
+                                style="height: 300px;">
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="card-body p-4">
+
+                                <span class="badge bg-success mb-3 px-3 py-2">
+                                    Terceiro Pilar
+                                </span>
+
+                                <h3 class="fw-bold mb-3">
+                                    Parcerias duradouras
+                                </h3>
+
+                                <p class="text-muted mb-0">
+                                    Construímos parcerias duradouras baseadas em confiança,
+                                    proximidade e compromisso com o sucesso.
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!--FIM DO SESSÃO DOS CARDS TA COMENTADO PALMIRINHA-->
+            </section>
+
+            <!-- Início da seção de integrantes -->
+            <div class="integrantes-container">
+                <div class="integrante-card">
+                    <img src="{% static 'assets/imagens/integrantes/alessandra.jpeg' %}">
+                        <h4><b>Alessandra Zaffonato</b></h4>
+                            <p>
+                                Sócia fundadora da SoftControl Brasil...
+                            <br>
+                                Com mais de 15 anos de experiência com pessoas, Alessandra é uma pessoa fora da curva em gestão 
+                            </p>
+                </div>
+
+                <div class="integrante-card">
+                    <img src="{% static 'assets/imagens/integrantes/Filipe.png' %}">
+                        <h4><b>Filipe Zaffonato</b></h4>
+                            <p>
+                                Atua na venda e manutenção...
+                                <br>
+                                Filipe é o "novato" da empresa, com 5 anos de experiência, atendendo com 100% de atenção e carinho com os clientes.
+                                </p>
+                </div>
+
+                <div class="integrante-card">
+                    <img src="{% static 'assets/imagens/integrantes/Gui.jpeg' %}">
+                        <h4><b>Guilherme Zaffonato</b></h4>
+                            <p>
+                                Sócio fundador apaixonado por tecnologia...
+                                    <br>
+                                Guilherme com mais de 18 anos de estrada na tecnologia, hoje tem uma carteira de mais de 200 clientes na Softcontrol.
+                            </p>
+                </div>
+            </div>
+
+            <div style="display: flex; justify-content: center; align-items: center; margin: 30px 0px 0px 0px;">
+                    <hr style="width: 30%;">
+
+                    <button class="btn btn-success ms-3 me-3" onclick="window.location.href='{% url 'sobre' %}'" style="width: 40%;">Saiba Mais</button>
+                    
+                    <hr style="width: 30%;">
+                </div>
+        </section>
+
+        <section id="prod-serv" class="py-5">
+            <h2>Produtos e serviços</h2>
+            <p>Produtos e serviços prestados pela SoftControl Brasil</p>
+
+            <!-- Lista de produtos/serviços -->
+            <div id="prod-serv-container">
+
+                <!-- Produto/serviço prestado -->
+                <div class="item-prod-serv shadow">
+                    <div class="card" style="width: 18rem;">
+                        <img src="{% static 'assets/imagens/zweb/Solução completa (1).png' %}" class="card-img-top" alt="foto-produto">
+
+                        <div class="card-body">
+                            <h5 class="card-title"><b>Zweb - Sistema WEB</b></h5>
+                            <p class="card-text">O zweb é a solução voltada para o cliente que solicita o melhor da tecnologia.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fim produto/servico -->
+
+                <!-- Produto/serviço prestado -->
+                <div class="item-prod-serv shadow">
+                    <div class="card" style="width: 18rem;">
+                        <img src="{% static 'assets/imagens/Gpro/Folder Gpro (3).png' %}" class="card-img-top" alt="foto-produto">
+
+                        <div class="card-body">
+                            <h5 class="card-title"><b>GPRO - Sistema Local</b></h5>
+                            <p class="card-text">Gdoor Pro é o sistema com todos os recursos que você cliente precisa, de cadastro de clientes a emissão de nota, financeiro...</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fim produto/servico -->
+
+                <!-- Produto/serviço prestado -->
+                <div class="item-prod-serv shadow">
+                    <div class="card" style="width: 18rem;">
+                        <img src="{% static 'assets/imagens/Gpro/Post Financeiro e estoque no Gmicro.png' %}" class="card-img-top" alt="foto-produto">
+
+                        <div class="card-body">
+                            <h5 class="card-title"><b>GMICRO - Sistema MEI</b></h5>
+                            <p class="card-text">O Gmicro é pensado em você cliente MEI, perfeito para o controle de seu estoque, financeiro e emissão de nota manual.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fim produto/servico -->
+
+                <!-- Produto/serviço prestado -->
+                <div class="item-prod-serv shadow">
+                    <div class="card" style="width: 18rem;">
+                        <img src="{% static 'assets/imagens/Gpro/01 Post Ajatus agenda 24h.png' %}" class="card-img-top" alt="foto-produto">
+
+                        <div class="card-body">
+                            <h5 class="card-title"><b>AJATUS - App</b></h5>
+                            <p class="card-text">O ajatus é um sistema para agentamento de horário, ideal para consultórios, barbearia e fisioterapeutas</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fim produto/servico -->
+            </div>
+
+            <div style="display: flex; justify-content: center; align-items: center; margin: 30px 0px;">
+                <hr style="width: 30%;">
+
+                <button class="btn btn-success ms-3 me-3" onclick="window.location.href='{% url 'produtos' %}'" style="width: 40%;">Saiba Mais</button>
+                
+                <hr style="width: 30%;">
+            </div>
+
+        </section>
+        <!-- Fim seção produtos e serviços -->
+
+        <section id="parceiros" class="pb-5">
+            <h2>Parceiros</h2>
+            <p>Parceiros de negócio da SoftControl Brasil</p>
+
+            <!-- Início parceiros-container -->
+            <div id="parceiros-container">
+                <!-- Início item-parceiro -->
+                <div class="item-parceiro">
+                    <img src="{% static 'assets/imagens/zweb/zweb-colorido-horizontal-transparente-pq.png' %}" alt="Imagem logo ZWeb">
+                </div>
+                <!-- Fim item-parceiro -->
+
+                <!-- Início item-parceiro -->
+                <div class="item-parceiro">
+                    <img src="{% static 'assets/imagens/empresa/digisat.png' %}" alt="Imagem logo ZWeb">
+                </div>
+                <!-- Fim item-parceiro -->
+
+                <!-- Início item-parceiro -->
+                <div class="item-parceiro">
+                    <img src="{% static 'assets/imagens/empresa/gdoor.png' %}" alt="Imagem logo ZWeb">
+                </div>
+                <!-- Fim item-parceiro -->
+
+                <!-- Início item-parceiro -->
+                <div class="item-parceiro">
+                    <img src="{% static 'assets/imagens/empresa/acronis.png' %}" alt="Imagem logo ZWeb">
+                </div>
+                <!-- Fim item-parceiro -->
+            </div>
+            <!-- Fim parceiros-container -->
+        </section>
+        <!-- Fim seção parceiros -->
+
+        <section id="downloads" class="rounded shadow text-center" style="padding: 20px 15px;">
+            <h2 class="mb-3">Downloads</h2>
+            <p class="mb-3">Baixe aqui o acesso remoto da SoftControl Brasil</p>
+
+            <a href="{% url 'downloads' %}" rel="family" class="text-decoration-none">
+                <button type="button" class="btn btn-success">Download</button>
+            </a>
+        </section>        
+        <!-- Fim seção downloads -->
+    </main>
+
+    <footer>
+        <div id="footer-container">
+            <section id="informacoes">
+                <h4>Endereço</h4>
+            
+                <p>Rua Ricardo Borges Caon, 37, Bairro Glória, Vacaria, RS</p>
+            </section>
+
+            <section id="contato">
+                <h4>Entre em Contato</h4>
+                <ul>
+                    <li>
+                        <p class="m-0">atendimento@softcontrolbrasil.com.br</p>
+                    </li>
+                    <li>
+                        <p>(54) 3232-6956</p>
+                    </li>
+                </ul>
+            </section>
+
+            <section id="seguir">
+                <h4 class="mb-3">Siga-nos</h4>
+                
+                <a href="https://www.instagram.com/softcontrolbrasil_/" target="_blank" rel="external" class="text-decoration-none me-1">
+                    <button type="button" class="btn btn-success">
+                        <i class="bi bi-instagram"></i>
+                    </button>
+                </a>
+
+                <a href="https://www.facebook.com/people/Softcontrol-Brasil/pfbid05gJNEemHUZohizEtguMBbFfntt4BQ8bzu4NNRaAkW3rhr1qarmDy9yD2vHVjFmPyl/" target="_blank" rel="external" class="text-decoration-none">
+                    <button type="button" class="btn btn-success">
+                        <i class="bi bi-facebook"></i>
+                    </button>
+                </a>
+            </section>
+        </div>
+
+        <section style="text-align: center; margin-top: 10px; font-size: 0.8em;">
+            <p class="m-0">
+                Copyright © 2026 - <strong style="color: var(--verde-principal);">SoftControl Brasil</strong> - Desenvolvimento <a href="https://github.com/bbortolondasilva" target="_blank" rel="external" class="text-decoration-none" style="font-weight: bold; color: var(--verde-principal);">Bruno Bortolon <i class="bi bi-link-45deg"></i></a> e <a href="https://github.com/Lico862" target="_blank" rel="external" class="text-decoration-none" style="font-weight: bold; color: var(--verde-principal);">Filipe Zaffonato <i class="bi bi-link-45deg"></i></a>
+            </p>
+        </section>
+    </footer>
+
+    <!-- JS Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+    <!-- Script Próprio -->
+</body>
+</html>

@@ -24,7 +24,7 @@ def atuacao(request):
 def downloads(request):
     return render(request, "siteweb/downloads.html")
 
-def downloads_thanks(request):
+def downloads_obrigado(request):
     arquivo = request.GET.get("arquivo", "")
     caminho = PAGINAS.get(arquivo)
 
