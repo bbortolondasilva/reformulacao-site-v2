@@ -30,5 +30,5 @@ def downloads_obrigado(request):
 
     if not caminho:
         raise Http404("Arquivo de download não encontrado")
-    else:    
-        return render(request, "siteweb/obrigado.html", {"arquivo": arquivo, "caminho_download": caminho})
+    
+    return render(request, "siteweb/download_obrigado.html", {"arquivo": arquivo, "caminho_download": caminho})
