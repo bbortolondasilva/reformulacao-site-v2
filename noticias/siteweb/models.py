@@ -6,7 +6,7 @@ class Noticia(models.Model):
     imagem = models.ImageField() # Imagem da notícia
     data = models.DateField() # Data da notícia
     fonte = models.CharField(max_length=300) # Fonte de onde a notícia foi tirada
-    texto = models.CharField() # Texto da notícia
+    texto = models.TextField() # Texto da notícia
 
     def __str__(self):
         return self.titulo
