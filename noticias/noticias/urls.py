@@ -26,5 +26,5 @@ urlpatterns = [
     path("contato/", views.contato, name="contato"),
     path("atuacao/", views.atuacao, name="atuacao"),
     path("downloads/", views.downloads, name="downloads"),
-    path("downloads/obrigado/", views.downloads_obrigado, name="downloads_obrigado"),
+    path("download_obrigado/", views.downloads_obrigado, name="download_obrigado"),
 ]
