@@ -21,6 +21,9 @@ def contato(request):
 def atuacao(request):
     return render(request, "base/atuacao.html")
 
+def noticias(request):
+    return render(request, "base/noticias.html")
+
 def downloads(request):
     return render(request, "base/downloads.html")
 
