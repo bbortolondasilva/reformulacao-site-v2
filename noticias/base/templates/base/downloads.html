@@ -19,24 +19,22 @@
     <link rel="shortcut icon" href="{% static 'assets/imagens/empresa/logo/favicon.png' %}" type="image/x-icon">
 
     <style>
-        #agradecimento {
-            height: 60vh;
+        #downloads-container {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
         }
-        #agradecimento img {
-            width: min(80px, 100px);
-            margin-bottom: 10px;
+        .item-download {
+            flex: 0 0 280px;
         }
-        #agradecimento p a {
-            color: var(--verde-principal);
-            text-decoration: none;
-            font-weight: bold;
-        }
-        #agradecimento p a:hover {
-            color: var(--verde-destaque);
+        .banner{
+            background-image: url("{% static 'assets/imagens/empresa/banner/pagina.png' %}")
         }
     </style>
 </head>
-
+    
 <body>
     <header class="shadows">
         <nav class="navbar navbar-expand-lg bg-white">
@@ -58,7 +56,7 @@
                         <a class="nav-link" href="{% url 'downloads' %}">Downloads</a>
                         <a class="nav-link" href="{% url 'sobre' %}">Sobre</a>
                         <a class="nav-link" href="{% url 'contato' %}">Contato</a>
-                        <a class="nav-link" href="{% url 'atuacao' %}">Atuação</a>
+                        <a class="nav-link" href="{% url 'noticias' %}">Notícias</a>
                     </div>
                 </div>
             </div>
@@ -66,15 +64,42 @@
     </header>
     <!-- Fim header -->
 
+    <div class="banner">
+    
+    </div>
+    <!-- Fim div banner -->
+
     <main>
-        <section id="agradecimento" class="text-center" style="padding: 20px 15px; margin-top: 85px;">
-            <img src="{% static 'assets/imagens/empresa/logo/logo-icone.png' %}" alt="Logo SoftControl Brasil">
+        <section id="downloads" class="rounded shadow text-center" style="padding: 20px 15px; margin-top: 15px;">
+            <h2 class="mb-3">Downloads</h2>
 
-            <h2 class="mb-3">Obrigado por fazer o download!</h2>
+            <div id="downloads-container">
+                <!-- Início item-download -->
+                <div class="item-download shadow rounded p-3">
+                    <img src="{% static 'assets/imagens/empresa/logo/logo-icone.png' %}" alt="Logo SoftControl Brasil" style="width: min(50px, 80px);">
 
-            <p>Caso o download não tenha iniciado automaticamente <strong><a href="{% static caminho_download %}" download="{{ arquivo }}" id="baixar-novamente">Clique Aqui <i class="bi bi-link-45deg"></i></a></strong></p>
+                    <p class="mb-3">Baixe aqui o acesso remoto da SoftControl Brasil</p>
+
+                    <a href="{% url 'download_obrigado' %}?arquivo=Remoto-SoftControl.zip" rel="family" class="text-decoration-none">
+                        <button type="button" class="btn btn-success">Download</button>
+                    </a>
+                </div>
+                <!-- Fim item-download -->
+
+                <!-- Início item-download -->
+                <div class="item-download shadow rounded p-3">
+                    <img src="{% static 'assets/imagens/icon-anydesk.png' %}" alt="Logo SoftControl Brasil" style="width: min(50px, 80px); background-color: white; padding: 3px; border-radius: 3px; margin-bottom: 10px;">
+
+                    <p class="mb-3">Baixe aqui o acesso remoto da AnyDesk</p>
+
+                    <a href="{% url 'download_obrigado' %}?arquivo=anydesk-5-5-3.exe" rel="family" class="text-decoration-none">
+                        <button type="button" class="btn btn-danger">Download</button>
+                    </a>
+                </div>
+                <!-- Fim item-download -->
+            </div>
         </section>        
-        <!-- Fim seção agradecimento -->
+        <!-- Fim seção downloads -->
     </main>
 
     <footer>
@@ -125,6 +150,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
     <!-- Script Próprio -->
-    <script>window.addEventListener("load", function () { const link = document.getElementById("baixar-novamente"); if (link) link.click(); });</script>
 </body>
 </html>

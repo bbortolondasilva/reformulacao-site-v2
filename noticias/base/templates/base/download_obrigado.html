@@ -19,16 +19,20 @@
     <link rel="shortcut icon" href="{% static 'assets/imagens/empresa/logo/favicon.png' %}" type="image/x-icon">
 
     <style>
-        @media screen and (max-width: 768px) {
-            .banner {
-                background-image: url("{% static 'assets/imagens/empresa/banner/banner-completo-pq.png' %}");
-            }
+        #agradecimento {
+            height: 60vh;
         }
-
-        @media screen and (min-width: 768px) {
-            .banner {
-                background-image: url("{% static 'assets/imagens/empresa/banner/banner-completo.png' %}");
-            }
+        #agradecimento img {
+            width: min(80px, 100px);
+            margin-bottom: 10px;
+        }
+        #agradecimento p a {
+            color: var(--verde-principal);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        #agradecimento p a:hover {
+            color: var(--verde-destaque);
         }
     </style>
 </head>
@@ -54,7 +58,7 @@
                         <a class="nav-link" href="{% url 'downloads' %}">Downloads</a>
                         <a class="nav-link" href="{% url 'sobre' %}">Sobre</a>
                         <a class="nav-link" href="{% url 'contato' %}">Contato</a>
-                        <a class="nav-link" href="{% url 'atuacao' %}">Atuação</a>
+                        <a class="nav-link" href="{% url 'noticias' %}">Notícias</a>
                     </div>
                 </div>
             </div>
@@ -62,50 +66,15 @@
     </header>
     <!-- Fim header -->
 
-    <div class="banner">
-        
-    </div>
-    <!-- Fim div banner -->
-
     <main>
-        <section class="row g-4 text-center py-5">
-            <h1 style="color: var(--verde-destaque);">SoftControl Brasil</h1>
-            <p class="m-0 mb-3">Conheça nossa presença no mercado</p>
+        <section id="agradecimento" class="text-center" style="padding: 20px 15px; margin-top: 85px;">
+            <img src="{% static 'assets/imagens/empresa/logo/logo-icone.png' %}" alt="Logo SoftControl Brasil">
 
-            <div class="col-md-3">
-                <div class="card shadow p-3">
-                    <h2 id="c1">240</h2>
-                    <p>Clientes</p>
-                </div>
-            </div>
+            <h2 class="mb-3">Obrigado por fazer o download!</h2>
 
-            <div class="col-md-3">
-                <div class="card shadow p-3">
-                    <h2 id="c2">410</h2>
-                    <p>Sistemas</p>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="card shadow p-3">
-                    <h2 id="c3">68</h2>
-                    <p>Municípios</p>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="card shadow p-3">
-                    <h2 id="c4">98%</h2>
-                    <p>Satisfação</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="py-5 text-center">
-            <h2 style="color: var(--verde-destaque);" class="mb-3">Participação por segmento</h2>
-
-            <div class="col-lg-4" style="margin: auto;"><canvas id="segmentos"></canvas></div>
-        </section>
+            <p>Caso o download não tenha iniciado automaticamente <strong><a href="{% static caminho_download %}" download="{{ arquivo }}" id="baixar-novamente">Clique Aqui <i class="bi bi-link-45deg"></i></a></strong></p>
+        </section>        
+        <!-- Fim seção agradecimento -->
     </main>
 
     <footer>
@@ -156,9 +125,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
     <!-- Script Próprio -->
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <script src="{% static 'scripts/atuacao.js' %}"></script>
+    <script>window.addEventListener("load", function () { const link = document.getElementById("baixar-novamente"); if (link) link.click(); });</script>
 </body>
 </html>

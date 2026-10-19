@@ -19,22 +19,12 @@
     <link rel="shortcut icon" href="{% static 'assets/imagens/empresa/logo/favicon.png' %}" type="image/x-icon">
 
     <style>
-        #downloads-container {
-            display: flex;
-            flex-flow: row wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-        }
-        .item-download {
-            flex: 0 0 280px;
-        }
-        .banner{
-            background-image: url("{% static 'assets/imagens/empresa/banner/pagina.png' %}")
+        .banner {
+            background-image: url("{% static 'assets/imagens/empresa/banner/banner-contato.png' %}");
         }
     </style>
 </head>
-    
+
 <body>
     <header class="shadows">
         <nav class="navbar navbar-expand-lg bg-white">
@@ -56,7 +46,7 @@
                         <a class="nav-link" href="{% url 'downloads' %}">Downloads</a>
                         <a class="nav-link" href="{% url 'sobre' %}">Sobre</a>
                         <a class="nav-link" href="{% url 'contato' %}">Contato</a>
-                        <a class="nav-link" href="{% url 'atuacao' %}">Atuação</a>
+                        <a class="nav-link" href="{% url 'noticias' %}">Notícias</a>
                     </div>
                 </div>
             </div>
@@ -65,41 +55,106 @@
     <!-- Fim header -->
 
     <div class="banner">
-    
+        
     </div>
     <!-- Fim div banner -->
 
     <main>
-        <section id="downloads" class="rounded shadow text-center" style="padding: 20px 15px; margin-top: 15px;">
-            <h2 class="mb-3">Downloads</h2>
+        <section id="contato" class="py-5">
+            <h1 style="font-weight: normal;">Quer <strong style="color: var(--verde-principal);">entrar em contato?</strong></h1>
+            <p class="mb-5">Gostaríamos muito de ouvir você. Veja como nos contatar.</p>
 
-            <div id="downloads-container">
-                <!-- Início item-download -->
-                <div class="item-download shadow rounded p-3">
-                    <img src="{% static 'assets/imagens/empresa/logo/logo-icone.png' %}" alt="Logo SoftControl Brasil" style="width: min(50px, 80px);">
+            <!-- Lista de cards de contato -->
+            <div id="contato-container" class="d-flex flex-wrap justify-content-center gap-4">
+                <!-- Início card de contato -->
+                <div class="card contato-card">
+                    <div class="row g-0 align-items-center h-100">
+                        <div class="col-4">
+                            <img src="{% static 'assets/imagens/empresa/logo/logo-icone.png' %}"
+                                class="img-fluid p-3"
+                                alt="">
+                        </div>
 
-                    <p class="mb-3">Baixe aqui o acesso remoto da SoftControl Brasil</p>
+                        <div class="col-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Whatsapp</h5>
+                                <p class="card-text">
+                                    Entre em contato com nossa equipe através do whatsapp.
+                                </p>
 
-                    <a href="{% url 'download_obrigado' %}?arquivo=Remoto-SoftControl.zip" rel="family" class="text-decoration-none">
-                        <button type="button" class="btn btn-success">Download</button>
-                    </a>
+                                <a href="https://wa.me/5554984253585?text=Olá!%20Gostaria%20de%20mais%20informações." class="btn btn-success" target="_blank" rel="external">
+                                    Entrar em contato
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <!-- Fim item-download -->
+                <!-- Fim card de contato -->
 
-                <!-- Início item-download -->
-                <div class="item-download shadow rounded p-3">
-                    <img src="{% static 'assets/imagens/icon-anydesk.png' %}" alt="Logo SoftControl Brasil" style="width: min(50px, 80px); background-color: white; padding: 3px; border-radius: 3px; margin-bottom: 10px;">
+                <!-- Início card de contato -->
+                <div class="card contato-card">
+                    <div class="card-body">
+                        <h5 class="card-title text-center mb-4">Envie um e-mail</h5>
 
-                    <p class="mb-3">Baixe aqui o acesso remoto da AnyDesk</p>
+                        <form id="formContato">
 
-                    <a href="{% url 'download_obrigado' %}?arquivo=anydesk-5-5-3.exe" rel="family" class="text-decoration-none">
-                        <button type="button" class="btn btn-danger">Download</button>
-                    </a>
+                            <div class="mb-3">
+                                <label for="nome" class="form-label">Nome</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="nome"
+                                    name="nome"
+                                    placeholder="Digite seu nome"
+                                    required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="email" class="form-label">E-mail</label>
+                                <input
+                                    type="email"
+                                    class="form-control"
+                                    id="email"
+                                    name="email"
+                                    placeholder="Digite seu e-mail"
+                                    required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="assunto" class="form-label">Assunto</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="assunto"
+                                    name="assunto"
+                                    placeholder="Assunto da mensagem"
+                                    required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="mensagem" class="form-label">Mensagem</label>
+                                <textarea
+                                    class="form-control"
+                                    id="mensagem"
+                                    name="mensagem"
+                                    rows="5"
+                                    placeholder="Digite sua mensagem"
+                                    required></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-success w-100">
+                                Enviar mensagem
+                            </button>
+
+                            <div id="feedback" class="alert mt-3 d-none" role="alert"></div>
+                        </form>
+                    </div>
                 </div>
-                <!-- Fim item-download -->
+                <!-- Fim card de contato -->
             </div>
-        </section>        
-        <!-- Fim seção downloads -->
+            <!-- Fim da lista de cards de contato -->
+        </section>
+        <!-- Fim seção contato -->
     </main>
 
     <footer>
@@ -149,6 +204,17 @@
     <!-- JS Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
+
+    <!-- EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    <script>
+        emailjs.init({
+            publicKey: "mg40kI-1VVIJEVhb9"
+        });
+    </script>
+
     <!-- Script Próprio -->
+    <script src="{% static 'scripts/email.js' %}"></script>
 </body>
 </html>

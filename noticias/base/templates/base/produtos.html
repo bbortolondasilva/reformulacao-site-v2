@@ -49,7 +49,7 @@
                         <a class="nav-link" href="{% url 'downloads' %}">Downloads</a>
                         <a class="nav-link" href="{% url 'sobre' %}">Sobre</a>
                         <a class="nav-link" href="{% url 'contato' %}">Contato</a>
-                        <a class="nav-link" href="{% url 'atuacao' %}">Atuação</a>
+                        <a class="nav-link" href="{% url 'noticias' %}">Notícias</a>
                     </div>
                 </div>
             </div>
@@ -321,7 +321,7 @@
             <div style="display: flex; justify-content: center; align-items: center; margin: 30px 0px;">
                 <hr style="width: 30%;">
 
-                <button class="btn btn-success ms-3 me-3" onclick="window.location.href='{% url 'contato' %}'" style="width: 40%;">Entrar em Contato</button>
+                <a class="btn btn-success ms-3 me-3" href="{% url 'contato' %}" style="width: 40%;">Entrar em Contato</a>
 
                 <hr style="width: 30%;">
             </div>
