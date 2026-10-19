@@ -1,5 +1,5 @@
 """
-URL configuration for noticias project.
+URL configuration for siteweb project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/6.1/topics/http/urls/
@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from siteweb import views
+from base import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
