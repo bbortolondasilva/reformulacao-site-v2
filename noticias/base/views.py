@@ -18,9 +18,6 @@ def sobre(request):
 def contato(request):
     return render(request, "base/contato.html")
 
-def atuacao(request):
-    return render(request, "base/atuacao.html")
-
 def noticias(request):
     return render(request, "base/noticias.html")
 
