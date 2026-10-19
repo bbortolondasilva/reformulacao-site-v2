@@ -1,34 +1,34 @@
 from django.shortcuts import render
 from django.http import Http404
 
-PAGINAS = {
+ARQUIVOS = {
     "Remoto-SoftControl.zip": "assets/download/Remoto-SoftControl.zip", 
     "anydesk-5-5-3.exe": "assets/download/anydesk-5-5-3.exe",
 }
 
 def home(request):
-    return render(request, "siteweb/index.html")
+    return render(request, "base/index.html")
 
 def produtos(request):
-    return render(request, "siteweb/produtos.html")
+    return render(request, "base/produtos.html")
 
 def sobre(request):
-    return render(request, "siteweb/sobre.html")
+    return render(request, "base/sobre.html")
 
 def contato(request):
-    return render(request, "siteweb/contato.html")
+    return render(request, "base/contato.html")
 
 def atuacao(request):
-    return render(request, "siteweb/atuacao.html")
+    return render(request, "base/atuacao.html")
 
 def downloads(request):
-    return render(request, "siteweb/downloads.html")
+    return render(request, "base/downloads.html")
 
 def downloads_obrigado(request):
     arquivo = request.GET.get("arquivo", "")
-    caminho = PAGINAS.get(arquivo)
+    caminho = ARQUIVOS.get(arquivo)
 
     if not caminho:
         raise Http404("Arquivo de download não encontrado")
     
-    return render(request, "siteweb/download_obrigado.html", {"arquivo": arquivo, "caminho_download": caminho})
+    return render(request, "base/download_obrigado.html", {"arquivo": arquivo, "caminho_download": caminho})
