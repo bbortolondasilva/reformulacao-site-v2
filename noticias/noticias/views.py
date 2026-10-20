@@ -1,5 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Noticia
+from .forms import NoticiaForm
 
 # Create your views here.
-def home(request):
-    return render(request, "noticias/noticias.html")
+def listar(request):
+    noticias = Noticia.objects.all()
+
+    return render(request, "noticias/noticias.html", {
+        "noticias":noticias
+    })

@@ -34,6 +34,13 @@
     </style>
 </head>
 <body>
-    
+    {% for noticia in noticias %}
+        <h1>{{ noticia.titulo }}</h1>
+        <img src="{{ noticia.imagem.url }}" alt="{{ noticia.titulo }}"></img>
+
+        <p>{{ noticia.data }}</p>
+        <p>{{ noticia.fonte }}</p>
+        <p>{{ noticia.texto }}</p>
+    {% endfor %}
 </body>
 </html>
