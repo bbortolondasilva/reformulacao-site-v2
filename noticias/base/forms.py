@@ -1,1 +1,7 @@
-from django.forms import models
+from django.forms import ModelForm
+from .models import Noticia
+
+class NoticiaForm(ModelForm):
+    class Meta:
+        model = Noticia
+        fiels = "__all__"
