@@ -18,13 +18,10 @@ def sobre(request):
 def contato(request):
     return render(request, "base/contato.html")
 
-def noticias(request):
-    return render(request, "base/noticias.html")
-
 def downloads(request):
     return render(request, "base/downloads.html")
 
-def downloads_obrigado(request):
+def download_obrigado(request):
     arquivo = request.GET.get("arquivo", "")
     caminho = ARQUIVOS.get(arquivo)
 
