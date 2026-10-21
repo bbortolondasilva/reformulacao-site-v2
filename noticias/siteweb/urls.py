@@ -26,6 +26,7 @@ urlpatterns = [
     path("noticias/", include("noticias.urls")),
 ]
 
+# Adição das rotas das imagens das notícias armazenadas.
 if settings.DEBUG:
     urlpatterns += static(
         settings.MEDIA_URL,
