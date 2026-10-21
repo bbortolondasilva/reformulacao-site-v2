@@ -118,6 +118,10 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
 
 # Email
 # https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
@@ -128,5 +132,6 @@ MAILERS = {
     },
 }
 
-MEDIA_URL = "/media/imagens-noticias/"
-MEDIA_ROOT = BASE_DIR / "media/imagens-noticias"
+MEDIA_URL = "/media/imagens-noticias/" # Caminho para acessar as imagens armazenadas.
+MEDIA_ROOT = BASE_DIR / "media/imagens-noticias" # Pasta onde as imagens são salvas no upload. 
+# Pasta raiz do projeto + caminho para a pasta onde as imagens ficarão.
