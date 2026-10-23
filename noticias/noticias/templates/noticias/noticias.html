@@ -69,19 +69,65 @@
 
     <main>
         <section id="noticias">
-            <h2>Título</h2>
-            <p>Texto</p>
+            <h2>Notícias</h2>
+            <p>Acompanhe aqui as notícias mais relevantes sobre o ramo empresarial.</p>
 
             <!-- Lista de noticias -->
             <div id="noticias-container">
-                {% for noticia in noticias %}
-                    <h2>{{ noticia.titulo }}</h2>
+                <!-- {% for noticia in noticias %}
+                    <div class="item-noticia">
+                        <h2>{{ noticia.titulo }}</h2>
+                        <img src="{{ noticia.imagem.url }}" alt="{{ noticia.titulo }}">
+                        <p>{{ noticia.texto }}</p>
+                    </div>
 
-                    <p>{{ noticia.texto }}</p>
-
-                    {% empty %} <!-- Caso não hajam notícias cadastradas -->
+                    {% empty %} Caso não hajam notícias cadastradas 
                         <h2>Nenhuma notícia cadastrada.</h2>
-                {% endfor %} 
+                {% endfor %}  -->
+
+                <div class="item-noticia">
+                    <div class="a">Imagem</div>
+                    <h2 class="titulo-noticia">Margem de lucro de empresas brasileiras varia de 13% a 33% do faturamento</h2>
+                    <div class="c">
+                        O faturamento das empresas brasileiras não significa a mesma coisa que margem de lucro. Um levantamento da Conta Azul identificou que, dependendo do modelo de negócio, a parcela que efetivamente sobra ao descontar custos e impostos fica entre 33,8% e 13,4% do faturamento inicial.
+
+                        Os dados foram compilados para o Índice Quanto Sobra 2026, por meio da comparação de seis tipos de operação a partir de dados públicos do IBGE (Instituto Brasileiro de Geografia e Estatística) e da legislação do Simples Nacional.
+                    </div>
+                    <div class="d">Data</div>
+                </div>
+
+                <div class="item-noticia">
+                    <div class="a">Imagem</div>
+                    <h2 class="titulo-noticia">Margem de lucro de empresas brasileiras varia de 13% a 33% do faturamento</h2>
+                    <div class="c">
+                        O faturamento das empresas brasileiras não significa a mesma coisa que margem de lucro. Um levantamento da Conta Azul identificou que, dependendo do modelo de negócio, a parcela que efetivamente sobra ao descontar custos e impostos fica entre 33,8% e 13,4% do faturamento inicial.
+
+                        Os dados foram compilados para o Índice Quanto Sobra 2026, por meio da comparação de seis tipos de operação a partir de dados públicos do IBGE (Instituto Brasileiro de Geografia e Estatística) e da legislação do Simples Nacional.
+                    </div>
+                    <div class="d">Data</div>
+                </div>
+
+                <div class="item-noticia">
+                    <div class="a">Imagem</div>
+                    <h2 class="titulo-noticia">Margem de lucro de empresas brasileiras varia de 13% a 33% do faturamento</h2>
+                    <div class="c">
+                        O faturamento das empresas brasileiras não significa a mesma coisa que margem de lucro. Um levantamento da Conta Azul identificou que, dependendo do modelo de negócio, a parcela que efetivamente sobra ao descontar custos e impostos fica entre 33,8% e 13,4% do faturamento inicial.
+
+                        Os dados foram compilados para o Índice Quanto Sobra 2026, por meio da comparação de seis tipos de operação a partir de dados públicos do IBGE (Instituto Brasileiro de Geografia e Estatística) e da legislação do Simples Nacional.
+                    </div>
+                    <div class="d">Data</div>
+                </div>
+
+                <div class="item-noticia">
+                    <div class="a">Imagem</div>
+                    <h2 class="titulo-noticia">Margem de lucro de empresas brasileiras varia de 13% a 33% do faturamento</h2>
+                    <div class="c">
+                        O faturamento das empresas brasileiras não significa a mesma coisa que margem de lucro. Um levantamento da Conta Azul identificou que, dependendo do modelo de negócio, a parcela que efetivamente sobra ao descontar custos e impostos fica entre 33,8% e 13,4% do faturamento inicial.
+
+                        Os dados foram compilados para o Índice Quanto Sobra 2026, por meio da comparação de seis tipos de operação a partir de dados públicos do IBGE (Instituto Brasileiro de Geografia e Estatística) e da legislação do Simples Nacional.
+                    </div>
+                    <div class="d">Data</div>
+                </div>
             </div>
         </section>
         <!-- Fim seção noticias -->
