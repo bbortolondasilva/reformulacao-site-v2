@@ -68,27 +68,23 @@
     <!-- Fim div banner -->
 
     <main>
-        <section id="prod-serv">
+        <section id="noticias">
             <h2>Título</h2>
             <p>Texto</p>
 
-            <!-- Lista de produtos/serviços -->
-            <div id="prod-serv-container">
+            <!-- Lista de noticias -->
+            <div id="noticias-container">
+                {% for noticia in noticias %}
+                    <h2>{{ noticia.titulo }}</h2>
 
+                    <p>{{ noticia.texto }}</p>
+
+                    {% empty %} <!-- Caso não hajam notícias cadastradas -->
+                        <h2>Nenhuma notícia cadastrada.</h2>
+                {% endfor %} 
             </div>
         </section>
-        <!-- Fim seção produtos e serviços -->
-
-        <section id="parceiros">
-            <h2>Título</h2>
-            <p>Texto</p>
-
-            <!-- Início parceiros-container -->
-            <div id="parceiros-container">
-            
-            </div>
-        </section>
-        <!-- Fim seção parceiros -->
+        <!-- Fim seção noticias -->
     </main>
 
     <footer>

@@ -252,6 +252,10 @@ div#prod-serv-container {
     min-height: 220px;
 }
 
+#noticias {
+    margin-top: 15px;
+}
+
 footer {
     grid-column: 1 / -1;
 
