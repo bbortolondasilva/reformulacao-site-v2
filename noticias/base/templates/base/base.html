@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -12,20 +13,20 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
     <!-- CSS Próprio -->
-    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="{% static 'assets/styles/style.css' %}">
 
     <!-- Link Favicon -->
-    <link rel="shortcut icon" href="../assets/imagens/empresa/logo/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static 'assets/imagens/empresa/logo/favicon.png' %}" type="image/x-icon">
 </head>
 
 <body>
     <header class="shadows">
         <nav class="navbar navbar-expand-lg bg-white">
             <div class="container-fluid">
-                <a class="navbar-brand m-0" href="../index.html">
-                    <img src="../assets/imagens/empresa/logo/logo-icone.png" alt="Ícone SoftControl Brasil" id="icone-softcontrol">
+                <a class="navbar-brand m-0" href="{% url 'home' %}">
+                    <img src="{% static 'assets/imagens/empresa/logo/logo-icone.png' %}" alt="Ícone SoftControl Brasil" id="icone-softcontrol">
 
-                    <img src="../assets/imagens/empresa/logo/logo-soft-texto-header.png" alt="Logo SoftControl Brasil" id="logo-softcontrol">
+                    <img src="{% static 'assets/imagens/empresa/logo/logo-soft-texto-header.png' %}" alt="Logo SoftControl Brasil" id="logo-softcontrol">
                 </a>
 
                 <button class="navbar-toggler m-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,11 +35,12 @@
 
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-link active" aria-current="page" href="../index.html">Início</a>
-                        <a class="nav-link" href="pages/prod-serv.html">Produtos</a>
-                        <a class="nav-link" href="pages/downloads/downloads.html">Downloads</a>
-                        <a class="nav-link" href="pages/sobre.html">Sobre</a>
-                        <a class="nav-link" href="pages/contato.html">Contato</a>
+                        <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Início</a>
+                        <a class="nav-link" href="{% url 'produtos' %}">Produtos</a>
+                        <a class="nav-link" href="{% url 'downloads' %}">Downloads</a>
+                        <a class="nav-link" href="{% url 'sobre' %}">Sobre</a>
+                        <a class="nav-link" href="{% url 'contatos' %}">Contato</a>
+                        <a href="{% url 'noticias:listar' %}" class="nav-link">Notícias</a>
                     </div>
                 </div>
             </div>
@@ -123,6 +125,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
     <!-- Script Próprio -->
-    <script src="scripts/script.js"></script>
 </body>
 </html>
