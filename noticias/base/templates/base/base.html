@@ -17,6 +17,21 @@
 
     <!-- Link Favicon -->
     <link rel="shortcut icon" href="{% static 'assets/imagens/empresa/logo/favicon.png' %}" type="image/x-icon">
+
+    <!-- Banner específico de cada página -->
+    <style>
+        @media screen and (max-width: 768px) {
+            .banner {
+                background-image: url("{% static 'assets/imagens/empresa/banner/banner-completo-pq.png' %}");
+            }
+        }
+
+        @media screen and (min-width: 768px) {
+            .banner {
+                background-image: url("{% static 'assets/imagens/empresa/banner/banner-completo.png' %}");
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -39,7 +54,7 @@
                         <a class="nav-link" href="{% url 'produtos' %}">Produtos</a>
                         <a class="nav-link" href="{% url 'downloads' %}">Downloads</a>
                         <a class="nav-link" href="{% url 'sobre' %}">Sobre</a>
-                        <a class="nav-link" href="{% url 'contatos' %}">Contato</a>
+                        <a class="nav-link" href="{% url 'contato' %}">Contato</a>
                         <a href="{% url 'noticias:listar' %}" class="nav-link">Notícias</a>
                     </div>
                 </div>
