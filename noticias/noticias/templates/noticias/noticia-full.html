@@ -21,7 +21,7 @@
     <style>
         .banner {
             height: 0px;
-            margin-top: 0px;
+            margin-top: 76px;
         }
     </style>
 </head>
@@ -60,23 +60,26 @@
     </div>
     <!-- Fim div banner -->
 
-    <main>
+    <main style="background-color: var(--verde-destaque);">
         <!-- Início seção notícia full -->
         <section id="noticia-full">
             <div class="header-noticia-full">
-                <img src="{{ noticia.imagem.url }}" alt="{{ noticia.titulo }}" class="imagem-noticia-full">
-
+                <h2 class="titulo-noticia-full">{{ noticia.titulo }}</h2>
+                
                 <p class="data-noticia-full">{{ noticia.data }}</p>
+
+                <hr>
+
+                <img src="{{ noticia.imagem.url }}" alt="{{ noticia.titulo }}" class="imagem-noticia-full">
             </div>
 
-            <h2 class="titulo-noticia-full">{{ noticia.titulo }}</h2>
             
             <article class="texto-noticia-full">
                 {{ noticia.texto }}
             </article>
 
             <div class="footer-noticia-full">
-                <p>
+                <p class="m-0">
                     Leia mais em: 
 
                     <a href="{{ noticia.fonte }}" class="fonte-noticia-full">
