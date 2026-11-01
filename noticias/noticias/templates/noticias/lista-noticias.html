@@ -77,8 +77,17 @@
                 {% for noticia in noticias %}
                     <div class="item-noticia">
                         <img class="imagem-noticia" src="{{ noticia.imagem.url }}" alt="{{ noticia.titulo }}">
-                        <h2 class="titulo-noticia">{{ noticia.titulo }}</h2>
-                        <p class="texto-noticia">{{ noticia.texto|truncatewords:29 }} <a href="#">Ler mais</a></p>
+
+                        <a href="{% url 'noticias:noticia-full' noticia.pk %}">
+                            <h2 class="titulo-noticia">{{ noticia.titulo }}</h2>
+                        </a>
+
+                        <p class="texto-noticia">
+                            {{ noticia.texto|truncatewords:25 }} 
+                        </p>
+
+                        <a href="{% url 'noticias:noticia-full' noticia.pk %}" class="btn btn-success ms-2 me-2">Ler mais</a>
+
                         <p class="data-noticia">{{ noticia.data }}</p>
                     </div>
 
