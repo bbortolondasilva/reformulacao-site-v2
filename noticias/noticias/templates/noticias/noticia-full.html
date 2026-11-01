@@ -19,16 +19,9 @@
     <link rel="shortcut icon" href="{% static 'assets/imagens/empresa/logo/favicon.png' %}" type="image/x-icon">
 
     <style>
-        @media screen and (max-width: 768px) {
-            .banner {
-                background-image: url("{% static 'assets/imagens/empresa/banner/banner-completo-pq.png' %}");
-            }
-        }
-
-        @media screen and (min-width: 768px) {
-            .banner {
-                background-image: url("{% static 'assets/imagens/empresa/banner/banner-completo.png' %}");
-            }
+        .banner {
+            height: 0px;
+            margin-top: 0px;
         }
     </style>
 </head>
@@ -68,27 +61,31 @@
     <!-- Fim div banner -->
 
     <main>
-        <section id="prod-serv">
-            <h2>Título</h2>
-            <p>Texto</p>
+        <!-- Início seção notícia full -->
+        <section id="noticia-full">
+            <div class="header-noticia-full">
+                <img src="{{ noticia.imagem.url }}" alt="{{ noticia.titulo }}" class="imagem-noticia-full">
 
-            <!-- Lista de produtos/serviços -->
-            <div id="prod-serv-container">
-
+                <p class="data-noticia-full">{{ noticia.data }}</p>
             </div>
-        </section>
-        <!-- Fim seção produtos e serviços -->
 
-        <section id="parceiros">
-            <h2>Título</h2>
-            <p>Texto</p>
-
-            <!-- Início parceiros-container -->
-            <div id="parceiros-container">
+            <h2 class="titulo-noticia-full">{{ noticia.titulo }}</h2>
             
+            <article class="texto-noticia-full">
+                {{ noticia.texto }}
+            </article>
+
+            <div class="footer-noticia-full">
+                <p>
+                    Leia mais em: 
+
+                    <a href="{{ noticia.fonte }}" class="fonte-noticia-full">
+                        {{ noticia.fonte|truncatechars:50}}
+                    </a>
+                </p>
             </div>
         </section>
-        <!-- Fim seção parceiros -->
+        <!-- Fim seção notícia específica -->
     </main>
 
     <footer>
