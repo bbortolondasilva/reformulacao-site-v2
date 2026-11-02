@@ -37,3 +37,16 @@ def criarNoticia(request):
     return render(request, "noticias/criar-noticia.html", {
         "form": form
     })
+
+# Excluir uma notícia:
+def excluirNoticia(request, idNoticia):
+    if request.method == "POST":
+        noticia = get_object_or_404(Noticia, pk=idNoticia)
+
+        # Exclui a imagem da pasta media
+        noticia.imagem.delete(save=False) # save=False garante a exclusão
+
+        # Exclui o registro do banco de dados
+        noticia.delete()
+
+        return redirect("noticias:listar")
