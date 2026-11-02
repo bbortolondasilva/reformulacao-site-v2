@@ -95,8 +95,12 @@
                     </div>
 
                     {% empty %} <!-- Caso não hajam notícias cadastradas -->
-                        <h2>Nenhuma notícia cadastrada.</h2>
+                        <h2 class="mb-3">Nenhuma notícia cadastrada.</h2>
                 {% endfor %} 
+                
+                <a href="{% url 'noticias:criar-noticia' %}" class="btn btn-success" style="margin: auto; display: block; max-width: 200px;">
+                    Adicionar Notícia
+                </a>
 
                 <!-- Layout card noticia -->
                 <!-- <div class="item-noticia">
