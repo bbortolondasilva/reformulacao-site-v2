@@ -70,11 +70,20 @@
 
     <main>
         <section id="noticias">
-            <h2>Notícias</h2>
-            <p>Acompanhe aqui as notícias mais relevantes sobre o ramo empresarial.</p>
+            <h2 style="text-align: center;">Notícias</h2>
+            <p style="text-align: center;">Acompanhe aqui as notícias mais relevantes sobre o ramo empresarial.</p>
 
             <!-- Lista de noticias -->
             <div id="noticias-container">
+                <hr>
+
+                <!-- Botão para adição de notícias -->
+                <a href="{% url 'noticias:criar-noticia' %}" class="btn btn-success mb-4" style="margin: auto; display: block; max-width: 200px;">
+                    <i class="bi bi-plus-circle me-2"></i>
+
+                    Adicionar Notícia
+                </a>
+
                 <!-- Para cada notícia na lista de notícias enviadas pela view -->
                 {% for noticia in noticias %}
                     <div class="item-noticia">
@@ -97,12 +106,6 @@
                     {% empty %} <!-- Caso não hajam notícias cadastradas -->
                         <h2 class="mb-3">Nenhuma notícia cadastrada.</h2>
                 {% endfor %} 
-                
-                <a href="{% url 'noticias:criar-noticia' %}" class="btn btn-success" style="margin: auto; display: block; max-width: 200px;">
-                    <i class="bi bi-plus-circle me-2"></i>
-
-                    Adicionar Notícia
-                </a>
 
                 <!-- Layout card noticia -->
                 <!-- <div class="item-noticia">
