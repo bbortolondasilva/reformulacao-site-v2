@@ -23,6 +23,18 @@
             height: 0px;
             margin-top: 76px;
         }
+
+        @media screen and (max-width: 768px) {
+            main {
+                background-color: var(--fundo-secundario);
+            }
+        }
+
+        @media screen and (min-width: 768px) {
+            main {
+                background-color: var(--verde-destaque);
+            }
+        }
     </style>
 </head>
 
@@ -60,7 +72,7 @@
     </div>
     <!-- Fim div banner -->
 
-    <main style="background-color: var(--verde-destaque);">
+    <main>
         <!-- Início seção notícia full -->
         <section id="noticia-full">
             <div class="header-noticia-full">
@@ -71,6 +83,7 @@
                 <hr>
 
                 <img src="{{ noticia.imagem.url }}" alt="{{ noticia.titulo }}" class="imagem-noticia-full">
+                <hr>
             </div>
 
             
@@ -79,13 +92,18 @@
             </article>
 
             <div class="footer-noticia-full">
-                <p class="m-0">
+                <p>
                     Leia mais em: 
 
                     <a href="{{ noticia.fonte }}" class="fonte-noticia-full">
                         {{ noticia.fonte|truncatechars:50}}
                     </a>
                 </p>
+
+                <a href="#" class="btn btn-success">Anterior</a>
+                <a href="#" class="btn btn-success">Próxima</a>
+                <a href="#" class="btn btn-primary">Editar</a>
+                <a href="#" class="btn btn-danger">Excluir</a>
             </div>
         </section>
         <!-- Fim seção notícia específica -->
