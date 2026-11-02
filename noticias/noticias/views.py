@@ -44,4 +44,4 @@ def excluirNoticia(request, idNoticia):
         noticia = get_object_or_404(Noticia, pk=idNoticia)
         noticia.delete()
 
-        return redirect("noticia:listar")
+        return redirect("noticias:listar")

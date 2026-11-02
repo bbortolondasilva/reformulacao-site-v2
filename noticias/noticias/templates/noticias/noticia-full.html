@@ -100,10 +100,60 @@
                     </a>
                 </p>
 
-                <a href="#" class="btn btn-success">Anterior</a>
-                <a href="#" class="btn btn-success">Próxima</a>
-                <a href="#" class="btn btn-primary">Editar</a>
-                <a href="#" class="btn btn-danger">Excluir</a>
+                <!-- Botões de navegação entre notícias -->
+                <a href="#" class="btn btn-success acao-noticia">Anterior</a>
+                <a href="#" class="btn btn-success acao-noticia">Próxima</a>
+
+                <!-- Botão de edição de notícia -->
+                <a href="#" class="btn btn-primary acao-noticia">Editar</a>
+
+                <!-- Botão de exclusão de notícia -->
+                <button type="button" class="btn btn-danger acao-noticia" data-bs-toggle="modal" data-bs-target="#modalExcluir">Excluir</button>
+
+                <!-- Modal de confirmação de exclusão de notícia -->
+                <div class="modal fade" id="modalExcluir" tabindex="-1"
+                    aria-labelledby="tituloModalExcluir" aria-hidden="true">
+
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="tituloModalExcluir">
+                                    Confirmar exclusão
+                                </h5>
+
+                                <button type="button" class="btn-close"
+                                        data-bs-dismiss="modal"
+                                        aria-label="Fechar">
+                                </button>
+                            </div>
+
+                            <div class="modal-body">
+                                Tem certeza que deseja excluir a notícia
+                                <strong>{{ noticia.titulo }}</strong>?
+                                <strong class="text-danger">Essa operação não poderá ser desfeita.</strong>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">
+                                    Cancelar
+                                </button>
+
+                                <form method="POST"
+                                    action="{% url 'noticias:excluir-noticia' noticia.pk %}">
+
+                                    {% csrf_token %}
+
+                                    <button type="submit" class="btn btn-danger">
+                                        Confirmar exclusão
+                                    </button>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
         <!-- Fim seção notícia específica -->
