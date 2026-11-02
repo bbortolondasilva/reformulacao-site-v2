@@ -37,3 +37,11 @@ def criarNoticia(request):
     return render(request, "noticias/criar-noticia.html", {
         "form": form
     })
+
+# Excluir uma notícia:
+def excluirNoticia(request, idNoticia):
+    if request.method == "POST":
+        noticia = get_object_or_404(Noticia, pk=idNoticia)
+        noticia.delete()
+
+        return redirect("noticia:listar")
