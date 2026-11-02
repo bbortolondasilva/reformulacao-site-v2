@@ -69,13 +69,13 @@
 
             <!-- Formulário de criação de notícia -->
             <div id="form-noticia-container">
-                <form method="POST">
+                <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     
                     {{ form.as_p }}
-                </form>
 
-                <button class="btn btn-success" type="submit">Cadatrar Notícia</button>
+                    <button class="btn btn-success" type="submit">Cadatrar Notícia</button>
+                </form>
             </div>
         </section>
         <!-- Fim seção cadastro de notícia -->

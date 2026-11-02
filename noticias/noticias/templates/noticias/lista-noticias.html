@@ -75,10 +75,12 @@
 
             <!-- Lista de noticias -->
             <div id="noticias-container">
+                <!-- Para cada notícia na lista de notícias enviadas pela view -->
                 {% for noticia in noticias %}
                     <div class="item-noticia">
                         <img class="imagem-noticia" src="{{ noticia.imagem.url }}" alt="{{ noticia.titulo }}">
 
+                        <!-- Envia para a url noticia-full junto da PK da notícia -->
                         <a href="{% url 'noticias:noticia-full' noticia.pk %}">
                             <h2 class="titulo-noticia">{{ noticia.titulo }}</h2>
                         </a>

@@ -16,7 +16,7 @@ def listar(request):
 
 # Trazer dados de uma notícia específica:
 def noticiaFull(request, idNoticia):
-    noticia = get_object_or_404(Noticia, pk=idNoticia)
+    noticia = get_object_or_404(Noticia, pk=idNoticia) 
 
     return render(request, "noticias/noticia-full.html", {
         "noticia": noticia,
@@ -25,11 +25,11 @@ def noticiaFull(request, idNoticia):
 # Criar uma nova notícia:
 def criarNoticia(request):
     if request.method == "POST":
-        form = NoticiaForm(request.POST)
+        form = NoticiaForm(request.POST, request.FILES) # request.POST recebe os dados textuais do formulário, request.FILES recebe a imagem enviada no formulário.
 
         if form.is_valid():
             form.save()
-            return redirect("noticias:lista")
+            return redirect("noticias:listar")
 
     else:
         form = NoticiaForm()
