@@ -101,8 +101,19 @@
                 </p>
 
                 <!-- Botões de navegação entre notícias -->
-                <a href="#" class="btn btn-success acao-noticia">Anterior</a>
-                <a href="#" class="btn btn-success acao-noticia">Próxima</a>
+                {% if anterior %}
+                    <!-- Notícia anterior -->
+                    <a href="{% url 'noticias:noticia-anterior' noticia.pk %}" class="btn btn-success acao-noticia">
+                        Anterior
+                    </a>
+                {% endif %}
+                
+                {% if proxima %}
+                    <!-- Próxima notícia -->
+                    <a href="{% url 'noticias:proxima-noticia' noticia.pk %}" class="btn btn-success acao-noticia">
+                        Próxima
+                    </a>
+                {% endif %}
 
                 <!-- Botão de edição de notícia -->
                 <a href="#" class="btn btn-primary acao-noticia">Editar</a>

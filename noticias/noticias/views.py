@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.db.models import Max, Min
 from .models import Noticia
 from .forms import NoticiaForm
 
 # Create your views here.
 
 # READ:
-
 # Listar todas as notícias cadastradas:
 def listar(request):
     noticias = Noticia.objects.all()
@@ -18,28 +18,74 @@ def listar(request):
 def noticiaFull(request, idNoticia):
     noticia = get_object_or_404(Noticia, pk=idNoticia) 
 
+    # Verifica se existe uma próxima notícia:
+    proxima = Noticia.objects.filter(id__gt=idNoticia).exists()
+    # Verifica se existe uma notícia anterior:
+    anterior = Noticia.objects.filter(id__lt=idNoticia).exists()
+
     return render(request, "noticias/noticia-full.html", {
         "noticia": noticia,
+        # Envia os testes de próxima e anterior para a interface para poder controlar a existência dos botões nela.
+        "proxima": proxima,
+        "anterior": anterior,
     })
 
+# Próxima notícia:
+def proximaNoticia(request, idNoticia):
+    noticia = get_object_or_404(Noticia, pk=idNoticia)
+
+    # Próximo id no banco de dados:
+    proxima = Noticia.objects.filter(
+        id__gt = idNoticia # filtra as noticias com id maior que o idNoticia passado.
+    ).order_by("id").first() # ordena de forma crescente e pega o primeiro id da lista.
+
+    # Se tiver uma próxima notícia:
+    if proxima:
+        return redirect("noticias:noticia-full", idNoticia=proxima.id) # redireciona para a noticia full com dados da próxima notícia.
+
+    return redirect("noticias:noticia-full", idNoticia=noticia.id) # redireciona para a noticia atual.
+
+# Notícia anterior:
+def noticiaAnterior(request, idNoticia):
+    noticia = get_object_or_404(Noticia, pk=idNoticia)
+
+    # Id anterior no banco de dados:
+    anterior = Noticia.objects.filter(
+        id__lt = idNoticia # Filtra as noticias com id menor que o idNoticia passado.
+    ).order_by("-id").first() # Ordena de forma decrescente e pega o primeiro id da lista.
+
+    # Se tiver uma notícia anterior:
+    if anterior:
+        return redirect("noticias:noticia-full", idNoticia=anterior.id) # Redireicona para a notícia-full com dados da notícia anterior.
+
+    return redirect("noticias:noticia-full", idNoticia=idNoticia) # Redireciona paraa noticia atual.
+
+
+# CREATE:
 # Criar uma nova notícia:
 def criarNoticia(request):
+    # Se dados forem enviados no formulário:
     if request.method == "POST":
         form = NoticiaForm(request.POST, request.FILES) # request.POST recebe os dados textuais do formulário, request.FILES recebe a imagem enviada no formulário.
 
+        # Se o formulário for válido:
         if form.is_valid():
-            form.save()
-            return redirect("noticias:listar")
+            form.save() # Salva no banco
+            return redirect("noticias:listar") # redireciona para a listagem de notícias.
 
+    # Se for apenas acesso ao formulário:
     else:
-        form = NoticiaForm()
+        form = NoticiaForm() # Atribui os campos do formulário vazios.
 
     return render(request, "noticias/criar-noticia.html", {
         "form": form
     })
 
+
+#DELETE:
 # Excluir uma notícia:
 def excluirNoticia(request, idNoticia):
+    # Se for enviada uma notícia para exclusã:
     if request.method == "POST":
         noticia = get_object_or_404(Noticia, pk=idNoticia)
 
@@ -49,4 +95,4 @@ def excluirNoticia(request, idNoticia):
         # Exclui o registro do banco de dados
         noticia.delete()
 
-        return redirect("noticias:listar")
+        return redirect("noticias:listar") # Redireciona para a listagem de notícias.
