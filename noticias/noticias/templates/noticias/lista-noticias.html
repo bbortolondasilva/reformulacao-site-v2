@@ -96,7 +96,7 @@
 
                         <p class="texto-noticia">
                             <!-- Mostra apenas 25 palavras do conteúdo da notícia e já adiciona retiscências -->
-                            {{ noticia.texto|truncatewords:25 }} 
+                            {{ noticia.texto|truncatewords:25 }}
                         </p>
 
                         <a href="{% url 'noticias:noticia-full' noticia.pk %}" class="btn btn-success ms-2 me-2">Ler mais</a>
