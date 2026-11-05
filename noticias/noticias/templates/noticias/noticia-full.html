@@ -116,7 +116,7 @@
                 {% endif %}
 
                 <!-- Botão de edição de notícia -->
-                <a href="#" class="btn btn-primary acao-noticia">Editar</a>
+                <a href="{% url 'noticias:editar-noticia' noticia.pk %}" class="btn btn-primary acao-noticia">Editar</a>
 
                 <!-- Botão de exclusão de notícia -->
                 <button type="button" class="btn btn-danger acao-noticia" data-bs-toggle="modal" data-bs-target="#modalExcluir">Excluir</button>
