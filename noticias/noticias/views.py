@@ -96,3 +96,32 @@ def excluirNoticia(request, idNoticia):
         noticia.delete()
 
         return redirect("noticias:listar") # Redireciona para a listagem de notícias.
+
+
+# UPDATE: 
+# Editar uma notícia:
+def editarNoticia(request, idNoticia):
+    # Notícia selecionada para edição
+    noticia = get_object_or_404(Noticia, pk=idNoticia)
+
+    # Se a requisição for post
+    if request.method == "POST":
+        # Instancia o formulário
+        form = NoticiaForm(
+            request.POST, # Envia os novos dados textuais
+            request.FILES, # Envia a nova imagem
+            instance=noticia # Associa ao registro que já existe daquela notícia.
+        )
+
+        # Se o formulário for válido:
+        if form.is_valid():
+            form.save() # Salva os dados no banco
+            return redirect("noticias:noticia-full", idNoticia=noticia.pk) # redireciona para a mesma notícia, já com as alterações.
+
+    else:
+        form = NoticiaForm(instance=noticia) # Atribui os dados já existentes da notícia. Instance=notica, associa ao registro existente da notícia para puxar os dados.
+
+    return render(request, "noticias/editar-noticia.html", { # Renderiza a página de notícias e envia os dados da notícia e do formulário.
+        "noticia": noticia,
+        "form": form,
+    })
