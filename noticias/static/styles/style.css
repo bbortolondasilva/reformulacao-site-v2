@@ -317,7 +317,7 @@ div#prod-serv-container {
 
     .item-noticia .texto-noticia {
         /* background-color: yellow; */
-        padding: 5px 15px;
+        padding: 10px 15px;
 
         font-size: 0.9rem;
         text-align: justify;
@@ -359,7 +359,9 @@ div#prod-serv-container {
         margin: 0px;
         margin-left: 10px;
         padding: 5px;
+
         font-size: 1.5rem;
+        overflow-wrap: break-word;
 
         align-self: center;
     }
@@ -374,10 +376,11 @@ div#prod-serv-container {
 
     .item-noticia .texto-noticia {
         /* background-color: yellow; */
-        padding: 5px;
+        padding: 10px 5px;
         margin-left: 10px;
 
         font-size: 1.1rem;
+        overflow-wrap: break-word;
 
         align-self: center;
     }
