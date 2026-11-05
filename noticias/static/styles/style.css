@@ -467,6 +467,7 @@ div#prod-serv-container {
     
     .footer-noticia-full p .fonte-noticia-full {
         color: var(--verde-claro);
+        overflow-wrap: break-word;
     }
 
     .footer-noticia-full p .fonte-noticia-full:hover {
@@ -561,6 +562,7 @@ div#prod-serv-container {
     
     .footer-noticia-full p .fonte-noticia-full {
         color: var(--verde-claro);
+        overflow-wrap: break-word;
     }
 
     .footer-noticia-full p .fonte-noticia-full:hover {
