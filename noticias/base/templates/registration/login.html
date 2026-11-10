@@ -10,7 +10,7 @@
     <main>
         <section id="form-login">
             <div id="form-login-imagem">
-                <!-- Aqui vai a imagem -->
+                <img src="" alt="">
             </div>
 
             <div id="form-login-container">
@@ -18,6 +18,11 @@
                 <p>Seja bem vindo(a). Faça login para acessar sua conta e poder fazer as configurações no seu ambiente.</p>
 
                 <form method="POST">
+                    {% csrf_token %}
+
+                    {{ form.username }} <!-- Usuário -->
+                    {{ form.password }} <!-- Senha -->
+
                     <button type="submit">Entrar</button>
 
                     <a class="botao" href="esqueci.html">Esqueci a senha <i class="material-icons">mail</i></a>
