@@ -55,6 +55,19 @@ header {
     width: min(80%, 230px);
 }
 
+a.nav-link:hover {
+    background-color: rgb(238, 238, 238);
+    border-radius: 8px;
+    transition: 0.2s;
+}
+
+a.nav-link:last-child:hover {
+    background-color: var(--verde-principal);
+    color: white;
+
+    transition: 0.3s;
+}
+
 .banner {
     grid-column: 1 / -1;
 
