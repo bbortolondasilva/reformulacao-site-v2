@@ -77,12 +77,14 @@
             <div id="noticias-container">
                 <hr>
 
-                <!-- Botão para adição de notícias -->
-                <a href="{% url 'noticias:criar-noticia' %}" class="btn btn-success mb-4" style="margin: auto; display: block; max-width: 200px;">
-                    <i class="bi bi-plus-circle me-2"></i>
+                {% if permis.noticias.add_noticia %}
+                    <!-- Botão para adição de notícias -->
+                    <a href="{% url 'noticias:criar-noticia' %}" class="btn btn-success mb-4" style="margin: auto; display: block; max-width: 200px;">
+                        <i class="bi bi-plus-circle me-2"></i>
 
-                    Adicionar Notícia
-                </a>
+                        Adicionar Notícia
+                    </a>
+                {% endif %}
 
                 <!-- Para cada notícia na lista de notícias enviadas pela view -->
                 {% for noticia in noticias %}

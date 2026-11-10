@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Max, Min
+from django.contrib.auth.decorators import permission_required
 from .models import Noticia
 from .forms import NoticiaForm
 
@@ -63,6 +64,8 @@ def noticiaAnterior(request, idNoticia):
 
 # CREATE:
 # Criar uma nova notícia:
+@permission_required("noticias.add_noticia") # precisa de permissão para poder executar.
+
 def criarNoticia(request):
     # Se dados forem enviados no formulário:
     if request.method == "POST":
@@ -84,6 +87,8 @@ def criarNoticia(request):
 
 #DELETE:
 # Excluir uma notícia:
+@permission_required("noticias.delete_noticia") # precisa de permissao para executar.
+
 def excluirNoticia(request, idNoticia):
     # Se for enviada uma notícia para exclusã:
     if request.method == "POST":
@@ -100,6 +105,8 @@ def excluirNoticia(request, idNoticia):
 
 # UPDATE: 
 # Editar uma notícia:
+@permission_required("noticias.change_noticia") # precisa de permissao para executar.
+
 def editarNoticia(request, idNoticia):
     # Notícia selecionada para edição
     noticia = get_object_or_404(Noticia, pk=idNoticia)
