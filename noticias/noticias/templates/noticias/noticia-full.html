@@ -115,13 +115,13 @@
                     </a>
                 {% endif %}
 
-                {% if permis.noticias.change_noticia %}
+                {% if perms.noticias.change_noticia %}
                     <!-- Botão de edição de notícia -->
                     <a href="{% url 'noticias:editar-noticia' noticia.pk %}" class="btn btn-primary acao-noticia">Editar</a>
                 {% endif %}
 
                 <!-- Se o usuário tiver permissão para executar a ação, o botão é carregado -->
-                {% if permis.noticias.delete_noticia %}
+                {% if perms.noticias.delete_noticia %}
                     <!-- Botão de exclusão de notícia -->
                     <button type="button" class="btn btn-danger acao-noticia" data-bs-toggle="modal" data-bs-target="#modalExcluir">Excluir</button>
                 {% endif %}
