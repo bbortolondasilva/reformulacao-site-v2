@@ -55,7 +55,21 @@
                         <a class="nav-link" href="{% url 'sobre' %}">Sobre</a>
                         <a class="nav-link" href="{% url 'contato' %}">Contato</a>
                         <a class="nav-link" href="{% url 'noticias:listar' %}">Notícias</a>
-                        <a class="nav-link" href="{% url 'login' %}">Entrar</a>
+                        
+                        <!-- Se o usuário já estiver logado, botão de sair -->
+                        {% if user.is_authenticated %}
+                            <form method="POST" action="{% url 'logout' %}">
+                                {% csrf_token %}
+                                <button type="submit" class="nav-link ps-3 pe-3 botao-logout">
+                                    Sair
+                                </button>
+                            </form>
+                        <!-- Se não estiver logado, botão de entrar -->
+                        {% else %}
+                            <a href="{% url 'login' %}" class="nav-link">
+                                Entrar
+                            </a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
