@@ -78,8 +78,8 @@
                     {% csrf_token %}
 
                     <!-- Nome do usuário -->
-                    <div>
-                        <label for="{{ form.username.id_for_label }}">
+                    <div class="mb-2">
+                        <label for="{{ form.username.id_for_label }}" class="form-label" style="font-size: 1.1rem;">
                             Usuário
                         </label>
 
@@ -87,8 +87,8 @@
                     </div>
 
                     <!-- Senha do usuário -->
-                    <div>
-                        <label for="{{ form.password.id_for_label }}">
+                    <div class="mb-2">
+                        <label for="{{ form.password.id_for_label }}" class="form-label" style="font-size: 1.1rem;">
                             Senha
                         </label>
                         
@@ -152,5 +152,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
     <!-- Script Próprio -->
+    <script>
+        // Campo usuário:
+        document.querySelector("#id_username").classList.add("form-control");
+
+        // Campo senha:
+        document.querySelector("#id_password").classList.add("form-control");
+    </script>
 </body>
 </html>
