@@ -100,6 +100,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Quando o usuário logar, redirecione para a tela inicial:
+LOGIN_REDIRECT_URL = '/'
+
+# Quando o usuário deslogar, redirecione para a tela inicial:
+LOGOUT_REDIRECT_URL = '/'
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/6.1/topics/i18n/
