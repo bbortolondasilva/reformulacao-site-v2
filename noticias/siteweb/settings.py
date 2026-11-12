@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "base",
     "noticias",
+    "rest_framework",   # Django REST Framework
+    "drf_spectacular",  # Documentação Swagger/OpenAPI
+    "drf_spectacular_sidecar",  # Arquivos do Swagger/ReDoc locais (não depende de CDN)
 ]
 
 MIDDLEWARE = [
@@ -141,3 +144,32 @@ MAILERS = {
 MEDIA_URL = "/media/imagens-noticias/" # Caminho para acessar as imagens armazenadas.
 MEDIA_ROOT = BASE_DIR / "media/imagens-noticias" # Pasta onde as imagens são salvas no upload. 
 # Pasta raiz do projeto + caminho para a pasta onde as imagens ficarão.
+
+
+# Django REST Framework
+REST_FRAMEWORK = {
+    # Login pela sessão do site (admin/accounts) ou usuário e senha (Basic) no Swagger/Postman
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.BasicAuthentication",
+    ],
+    # Leitura liberada; criar/editar/excluir exige as permissões do model no Django
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly",
+    ],
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 10,
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+# Documentação Swagger/OpenAPI (drf-spectacular)
+SPECTACULAR_SETTINGS = {
+    "TITLE": "API SoftControl - Notícias",
+    "DESCRIPTION": "API para consultar, criar, editar e excluir as notícias do site da SoftControl.",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    "COMPONENT_SPLIT_REQUEST": True,  # Mostra o campo de upload da imagem no Swagger
+    "SWAGGER_UI_DIST": "SIDECAR",  # Usa os arquivos locais em vez da CDN
+    "SWAGGER_UI_FAVICON_HREF": "SIDECAR",
+    "REDOC_DIST": "SIDECAR",
+}
