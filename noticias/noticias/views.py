@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Max, Min
 from django.contrib.auth.decorators import permission_required
+from django.contrib import messages
+from django.views.decorators.http import require_POST
 from .models import Noticia
 from .forms import NoticiaForm
 
@@ -132,3 +134,12 @@ def editarNoticia(request, idNoticia):
         "noticia": noticia,
         "form": form,
     })
+
+
+# Mudar a visibilidade de uma noticia:
+@permission_required("noticias.change_noticia")
+
+def visibilidadeNoticia(user):
+    if user.has_perm("noticias.change_noticia"):
+        return Noticia.objects.all()
+    return Noticia.objects.filter(publicada=True)
