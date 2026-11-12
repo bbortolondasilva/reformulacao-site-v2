@@ -735,3 +735,147 @@ footer {
     }
 }
 
+
+.weather-floating {
+    position: fixed;
+    right: 22px;
+    bottom: 25px;
+    z-index: 9999;
+    font-family: Arial, sans-serif;
+}
+
+/* Botão flutuante */
+.weather-button {
+    width: 65px;
+    height: 65px;
+    border: none;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #153b52, #247b89);
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.25);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+
+.weather-button span {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.weather-button:hover {
+    transform: scale(1.1);
+}
+
+/* Card expandido */
+.weather-popup {
+    display: none;
+    position: absolute;
+    right: 0;
+    bottom: 78px;
+    width: 260px;
+    padding: 18px;
+    box-sizing: border-box;
+    border-radius: 16px;
+    color: white;
+    background: linear-gradient(145deg, #153b52, #247b89);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+    animation: weatherAppear 0.25s ease;
+}
+
+.weather-popup.active {
+    display: block;
+}
+
+.weather-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.weather-header span {
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    opacity: 0.8;
+}
+
+.weather-header h4 {
+    margin: 5px 0;
+    font-size: 17px;
+}
+
+.weather-close {
+    border: none;
+    background: transparent;
+    color: white;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.weather-temp {
+    font-size: 43px;
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+.weather-details {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.weather-details div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.weather-details small {
+    font-size: 9px;
+    opacity: 0.7;
+}
+
+.weather-details strong {
+    font-size: 12px;
+}
+
+.weather-source {
+    margin-top: 12px;
+    font-size: 10px;
+    opacity: 0.8;
+}
+
+.weather-source a {
+    color: white;
+    font-weight: bold;
+}
+
+@keyframes weatherAppear {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Ajuste para celular */
+@media (max-width: 600px) {
+    .weather-floating {
+        right: 15px;
+        bottom: 15px;
+    }
+
+    .weather-button {
+        width: 55px;
+        height: 55px;
+    }
+}

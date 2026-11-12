@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import Http404
+from clima_api.services import obter_clima
 
 ARQUIVOS = {
     "Remoto-SoftControl.zip": "assets/download/Remoto-SoftControl.zip", 
@@ -7,7 +8,7 @@ ARQUIVOS = {
 }
 
 def home(request):
-    return render(request, "base/index.html")
+    return render(request, "base/index.html", obter_clima())
 
 def produtos(request):
     return render(request, "base/produtos.html")

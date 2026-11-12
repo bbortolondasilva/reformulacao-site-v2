@@ -345,6 +345,56 @@
         <!-- Fim seção downloads -->
     </main>
 
+        <div class="weather-floating">
+
+            <button class="weather-button" onclick="toggleWeather()">
+                🌤️
+                <span>{{ temperatura }}°</span>
+            </button>
+
+            <div class="weather-popup" id="weatherPopup">
+
+                <div class="weather-header">
+                    <div>
+                        <span>PREVISÃO LOCAL</span>
+                        <h4>Vacaria, RS</h4>
+                    </div>
+                    <button onclick="toggleWeather()" class="weather-close">×</button>
+                </div>
+
+                <div class="weather-temp">
+                    {{ temperatura }}°C
+                </div>
+
+                <div class="weather-details">
+                    <div>
+                        <small>DATA</small>
+                        <strong>{{ data }}</strong>
+                    </div>
+                    <div>
+                        <small>HORÁRIO</small>
+                        <strong>{{ hora }}</strong>
+                    </div>
+                </div>
+
+                <div class="weather-source">
+                    Dados fornecidos por
+                    <a href="https://open-meteo.com/" target="_blank">Open-Meteo</a>
+                </div>
+
+            </div>
+        </div>
+
+        <script>
+        function toggleWeather() {
+            document.getElementById("weatherPopup").classList.toggle("active");
+        }
+
+        setTimeout(function() {
+            location.reload();
+        }, 600000);
+        </script>
+        
     <footer>
         <div id="footer-container">
             <section id="informacoes">
