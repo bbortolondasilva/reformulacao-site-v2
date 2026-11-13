@@ -7,8 +7,10 @@ from rest_framework import filters, viewsets
 from rest_framework.parsers import FormParser, JSONParser, MultiPartParser
 from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly
 
-from .models import Noticia
+from noticias.models import Noticia
 from .serializers import NoticiaSerializer
+
+from noticias.views import noticias_visiveis
 
 
 @extend_schema_view(
@@ -51,7 +53,7 @@ class NoticiaViewSet(viewsets.ModelViewSet):
 
     - GET (listar/consultar): liberado para todos.
     - POST, PUT, PATCH, DELETE: só usuários logados com a permissão do Django
-      correspondente (add, change, delete) — as mesmas usadas nas telas do site.
+    correspondente (add, change, delete) — as mesmas usadas nas telas do site.
     """
 
     queryset = Noticia.objects.all().order_by("-data", "-id")
@@ -61,6 +63,10 @@ class NoticiaViewSet(viewsets.ModelViewSet):
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     search_fields = ["titulo", "fonte", "texto"]
     ordering_fields = ["data", "titulo", "id"]
+
+    # Aplica a mesma regra de visibilidade do site: visitante só vê as publicadas.
+    def get_queryset(self):
+        return noticias_visiveis(self.request.user).order_by("-data", "-id")
 
     def perform_update(self, serializer):
         imagem_antiga = serializer.instance.imagem

@@ -10,7 +10,7 @@ from PIL import Image
 from rest_framework import status
 from rest_framework.test import APITestCase
 
-from .models import Noticia
+from noticias.models import Noticia
 
 MEDIA_TESTE = tempfile.mkdtemp()  # Pasta temporária para as imagens dos testes
 

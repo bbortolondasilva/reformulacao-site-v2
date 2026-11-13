@@ -286,6 +286,7 @@ div#prod-serv-container {
 
 #noticias-container .item-noticia {
     display: grid;
+    position: relative;
 
     border: 2px solid;
     border-radius: 10px;
@@ -293,6 +294,13 @@ div#prod-serv-container {
     margin-bottom: 20px;
 
     overflow: hidden;
+}
+
+.item-noticia .badge {
+    position: absolute; /* sai do fluxo do grid */
+    top: 10px;
+    left: 10px;
+    z-index: 1;
 }
 
 .item-noticia a {
@@ -322,6 +330,11 @@ div#prod-serv-container {
     .item-noticia .imagem-noticia {
         background-color: var(--verde-destaque);
         grid-row: span 1;
+    }
+
+    span.badge {
+        margin-left: 7px;
+        margin-right: 7px;
     }
 
     .item-noticia .titulo-noticia {
@@ -364,7 +377,7 @@ div#prod-serv-container {
     #noticias .item-noticia {
         min-height: 250px;
         max-height: 350px;
-        grid-template-rows: 30% 40% 17% 15%;
+        grid-template-rows: 30% 40% 15% 15%;
         grid-template-columns: 35% 65%;
     }
 

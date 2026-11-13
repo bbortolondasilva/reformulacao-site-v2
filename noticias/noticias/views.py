@@ -1,28 +1,58 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.db.models import Max, Min
+from django.contrib import messages
+from django.views.decorators.http import require_POST
+from django.db.models import Q, Count, ProtectedError
 from django.contrib.auth.decorators import permission_required
-from .models import Noticia
-from .forms import NoticiaForm
+from .models import Noticia, Categoria
+from .forms import NoticiaForm, CategoriaForm
+
+# Define quais notícias o usuário atual pode ver:
+def noticias_visiveis(user):
+    # Quem tem permissão de editar notícias (usuário autorizado) vê todas, inclusive rascunhos:
+    if user.has_perm("noticias.change_noticia"):
+        return Noticia.objects.all()
+
+    # Os demais (visitantes) veem apenas as notícias publicadas:
+    return Noticia.objects.filter(publicada=True)
 
 # Create your views here.
 
 # READ:
 # Listar todas as notícias cadastradas:
 def listar(request):
-    noticias = Noticia.objects.all()
+    noticias = noticias_visiveis(request.user).select_related("categoria").order_by("-data", "-id")
+
+    # Parâmetros enviados pela URL (?q=...&categoria=...):
+    busca = request.GET.get("q", "").strip()
+    categoria_id = request.GET.get("categoria", "")
+
+    # Busca por parte do título ou do texto:
+    if busca:
+        noticias = noticias.filter(Q(titulo__icontains=busca) | Q(texto__icontains=busca))
+
+    # Filtro por categoria (isdigit evita erro se enviarem texto na URL):
+    if categoria_id.isdigit():
+        noticias = noticias.filter(categoria_id=categoria_id)
 
     return render(request, "noticias/lista-noticias.html", {
-        "noticias":noticias
+        "noticias": noticias,
+        "categorias": Categoria.objects.all(), # preenche o select do filtro.
+        "busca": busca, # devolve o que foi digitado para manter no campo.
+        "categoria_selecionada": categoria_id,
     })
 
 # Trazer dados de uma notícia específica:
 def noticiaFull(request, idNoticia):
-    noticia = get_object_or_404(Noticia, pk=idNoticia) 
+    # Conjunto de notícias que o usuário atual pode ver:
+    visiveis = noticias_visiveis(request.user)
+
+    # Busca dentro das visíveis. Se for um rascunho e o usuário for visitante, retorna 404:
+    noticia = get_object_or_404(visiveis, pk=idNoticia) 
 
     # Verifica se existe uma próxima notícia:
-    proxima = Noticia.objects.filter(id__gt=idNoticia).exists()
+    proxima = visiveis.filter(id__gt=idNoticia).exists()
     # Verifica se existe uma notícia anterior:
-    anterior = Noticia.objects.filter(id__lt=idNoticia).exists()
+    anterior = visiveis.filter(id__lt=idNoticia).exists()
 
     return render(request, "noticias/noticia-full.html", {
         "noticia": noticia,
@@ -33,10 +63,13 @@ def noticiaFull(request, idNoticia):
 
 # Próxima notícia:
 def proximaNoticia(request, idNoticia):
-    noticia = get_object_or_404(Noticia, pk=idNoticia)
+    # Conjunto de notícias que o usuário atual pode ver:
+    visiveis = noticias_visiveis(request.user)
+
+    noticia = get_object_or_404(visiveis, pk=idNoticia)
 
     # Próximo id no banco de dados:
-    proxima = Noticia.objects.filter(
+    proxima = visiveis.filter(
         id__gt = idNoticia # filtra as noticias com id maior que o idNoticia passado.
     ).order_by("id").first() # ordena de forma crescente e pega o primeiro id da lista.
 
@@ -48,10 +81,13 @@ def proximaNoticia(request, idNoticia):
 
 # Notícia anterior:
 def noticiaAnterior(request, idNoticia):
-    noticia = get_object_or_404(Noticia, pk=idNoticia)
+    # Conjunto de notícias que o usuário atual pode ver:
+    visiveis = noticias_visiveis(request.user)
+
+    noticia = get_object_or_404(visiveis, pk=idNoticia)
 
     # Id anterior no banco de dados:
-    anterior = Noticia.objects.filter(
+    anterior = visiveis.filter(
         id__lt = idNoticia # Filtra as noticias com id menor que o idNoticia passado.
     ).order_by("-id").first() # Ordena de forma decrescente e pega o primeiro id da lista.
 
@@ -132,3 +168,67 @@ def editarNoticia(request, idNoticia):
         "noticia": noticia,
         "form": form,
     })
+
+
+# CATEGORIAS:
+# Listar categorias (com a quantidade de notícias de cada uma):
+@permission_required("noticias.view_categoria", raise_exception=True)
+def listarCategorias(request):
+    categorias = Categoria.objects.annotate(total=Count("noticias"))
+
+    return render(request, "noticias/lista-categorias.html", {
+        "categorias": categorias
+    })
+
+# Criar categoria:
+@permission_required("noticias.add_categoria", raise_exception=True)
+def criarCategoria(request):
+    if request.method == "POST":
+        form = CategoriaForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Categoria cadastrada com sucesso.")
+            return redirect("noticias:listar-categorias")
+    else:
+        form = CategoriaForm()
+
+    return render(request, "noticias/form-categoria.html", {
+        "form": form,
+        "titulo": "Nova categoria",
+    })
+
+# Editar categoria:
+@permission_required("noticias.change_categoria", raise_exception=True)
+def editarCategoria(request, idCategoria):
+    categoria = get_object_or_404(Categoria, pk=idCategoria)
+
+    if request.method == "POST":
+        form = CategoriaForm(request.POST, instance=categoria)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Categoria atualizada com sucesso.")
+            return redirect("noticias:listar-categorias")
+    else:
+        form = CategoriaForm(instance=categoria)
+
+    return render(request, "noticias/form-categoria.html", {
+        "form": form,
+        "titulo": "Editar categoria",
+    })
+
+# Excluir categoria:
+@permission_required("noticias.delete_categoria", raise_exception=True)
+@require_POST
+def excluirCategoria(request, idCategoria):
+    categoria = get_object_or_404(Categoria, pk=idCategoria)
+
+    try:
+        categoria.delete()
+        messages.success(request, "Categoria excluída com sucesso.")
+    except ProtectedError:
+        # Regra de negócio: não exclui categoria que ainda tenha notícias.
+        messages.error(request, "Não é possível excluir: existem notícias nesta categoria.")
+
+    return redirect("noticias:listar-categorias")

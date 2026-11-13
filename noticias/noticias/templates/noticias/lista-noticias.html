@@ -92,6 +92,28 @@
             <div id="noticias-container">
                 <hr>
 
+                <!-- Formulário de busca por categoria -->
+                <form method="GET" class="row g-2 mb-4">
+                    <div class="col-md-6">
+                        <input type="text" name="q" value="{{ busca }}" class="form-control" placeholder="Buscar por título ou texto">
+                    </div>
+
+                    <div class="col-md-4">
+                        <select name="categoria" class="form-select">
+                            <option value="">Todas as categorias</option>
+                            {% for categoria in categorias %}
+                                <option value="{{ categoria.pk }}" {% if categoria.pk|stringformat:"s" == categoria_selecionada %}selected{% endif %}>
+                                    {{ categoria.nome }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-md-2 d-grid">
+                        <button type="submit" class="btn btn-success">Filtrar</button>
+                    </div>
+                </form>
+
                 {% if perms.noticias.add_noticia %}
                     <!-- Botão para adição de notícias -->
                     <a href="{% url 'noticias:criar-noticia' %}" class="btn btn-success mb-4" style="margin: auto; display: block; max-width: 200px;">
@@ -99,12 +121,26 @@
 
                         Adicionar Notícia
                     </a>
+
+                    {% if perms.noticias.view_categoria %}
+                        <a href="{% url 'noticias:listar-categorias' %}" class="btn btn-outline-success mb-4" style="margin: auto; display: block; max-width: 200px;">Gerenciar categorias</a>
+                    {% endif %}
                 {% endif %}
 
                 <!-- Para cada notícia na lista de notícias enviadas pela view -->
                 {% for noticia in noticias %}
                     <div class="item-noticia">
                         <img class="imagem-noticia" src="{{ noticia.imagem.url }}" alt="{{ noticia.titulo }}">
+
+                        <!-- Categoria da notícia -->
+                        {% if noticia.categoria %}
+                            <span class="badge text-bg-success p-2 mt-1 badge-rascunho">{{ noticia.categoria.nome }}</span>
+                        {% endif %}
+
+                        <!-- Se a notícia não estiver publicada -->
+                        {% if not noticia.publicada %}
+                            <span class="badge text-bg-warning p-2 mt-1 badge-rascunho">Não publicada</span>
+                        {% endif %}
 
                         <!-- Envia para a url noticia-full junto da PK da notícia -->
                         <a href="{% url 'noticias:noticia-full' noticia.pk %}">
@@ -118,11 +154,17 @@
 
                         <a href="{% url 'noticias:noticia-full' noticia.pk %}" class="btn btn-success ms-2 me-2">Ler mais</a>
 
-                        <p class="data-noticia">{{ noticia.data }}</p>
+                        <p class="data-noticia">
+                            {{ noticia.data }}
+                        </p>
                     </div>
 
-                    {% empty %} <!-- Caso não hajam notícias cadastradas -->
-                        <h2 class="mb-3">Nenhuma notícia cadastrada.</h2>
+                    {% empty %} <!-- Caso não hajam notícias cadastradas ou na categoria pesquisada -->
+                        {% if busca or categoria_selecionada %}
+                            <h2 class="mb-3">Nenhuma notícia encontrada para esses filtros.</h2>
+                        {% else %}
+                            <h2 class="mb-3">Nenhuma notícia publicada no momento.</h2>
+                        {% endif %}
                 {% endfor %} 
 
                 <!-- Layout card noticia -->

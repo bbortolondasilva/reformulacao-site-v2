@@ -2,7 +2,7 @@ from datetime import date
 
 from rest_framework import serializers
 
-from .models import Noticia
+from noticias.models import Noticia
 
 # Limites usados nas validações
 TAMANHO_MAX_IMAGEM_MB = 5
@@ -15,7 +15,7 @@ class NoticiaSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Noticia
-        fields = ["id", "titulo", "imagem", "data", "fonte", "texto"]
+        fields = ["id", "titulo", "imagem", "data", "fonte", "texto", "publicada"]
         read_only_fields = ["id"]
         # Mensagens próprias para campos obrigatórios
         extra_kwargs = {
