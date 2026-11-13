@@ -2,7 +2,7 @@ from datetime import date
 
 from rest_framework import serializers
 
-from .models import Noticia
+from noticias.models import Noticia
 
 # Limites usados nas validações
 TAMANHO_MAX_IMAGEM_MB = 5

@@ -7,7 +7,7 @@ from rest_framework import filters, viewsets
 from rest_framework.parsers import FormParser, JSONParser, MultiPartParser
 from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly
 
-from .models import Noticia
+from noticias.models import Noticia
 from .serializers import NoticiaSerializer
 
 
