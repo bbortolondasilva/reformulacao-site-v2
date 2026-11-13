@@ -3,13 +3,6 @@ Django==6.1.2
 pillow==12.3.0
 sqlparse==0.6.0
 tzdata==2026.5
-
-# API REST e documentacao (Swagger/OpenAPI)
-djangorestframework==3.18.3
-drf-spectacular==0.30.0
-drf-spectacular-sidecar==2026.10.1
-
-# Clima (Open-Meteo)
 openmeteo_requests==1.7.5
 openmeteo_sdk==1.30.0
 requests==2.32.5
