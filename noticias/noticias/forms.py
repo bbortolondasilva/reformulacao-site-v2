@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from django import forms
-from .models import Noticia
+from .models import Noticia, Categoria
 
 
 class NoticiaForm(ModelForm):
@@ -13,6 +13,10 @@ class NoticiaForm(ModelForm):
             "titulo": forms.TextInput(attrs={
                 "class": "form-control w-75 m-auto",
                 "placeholder": "Digite o título da notícia",
+            }),
+
+            "categoria": forms.Select(attrs={
+                "class": "form-select w-75 m-auto",
             }),
 
             "imagem": forms.ClearableFileInput(attrs={
@@ -40,3 +44,29 @@ class NoticiaForm(ModelForm):
                 "class": "form-check-input",
             }),
         }
+
+class CategoriaForm(ModelForm):
+    class Meta:
+        model = Categoria # Modelo associado
+        fields = ["nome"] # Colunas do banco para a criação dos campos
+
+        # Personalização do campo
+        widgets = {
+            "nome": forms.TextInput(attrs={
+                "class": "form-control",
+                "placeholder": "Digite o nome da categoria",
+            }),
+        }
+
+    # Impede nomes repetidos que só diferem em maiúsculas/minúsculas:
+    def clean_nome(self):
+        nome = self.cleaned_data["nome"].strip()
+
+        repetidas = Categoria.objects.filter(nome__iexact=nome)
+        if self.instance.pk:
+            repetidas = repetidas.exclude(pk=self.instance.pk) # ao editar, ignora ela mesma.
+
+        if repetidas.exists():
+            raise forms.ValidationError("Já existe uma categoria com este nome.")
+
+        return nome
