@@ -15,7 +15,7 @@ class NoticiaSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Noticia
-        fields = ["id", "titulo", "imagem", "data", "fonte", "texto"]
+        fields = ["id", "titulo", "imagem", "data", "fonte", "texto", "publicada"]
         read_only_fields = ["id"]
         # Mensagens próprias para campos obrigatórios
         extra_kwargs = {

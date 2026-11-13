@@ -106,8 +106,12 @@
                     <div class="item-noticia">
                         <img class="imagem-noticia" src="{{ noticia.imagem.url }}" alt="{{ noticia.titulo }}">
 
+                        {% if noticia.publicada %}
+                            <span class="badge text-bg-success p-2 mt-1 badge-rascunho">Publicada</span>
+                        {% endif %}
+
                         {% if not noticia.publicada %}
-                            <span class="badge text-bg-warning p-2 mt-1">Não publicada</span>
+                            <span class="badge text-bg-warning p-2 mt-1 badge-rascunho">Não publicada</span>
                         {% endif %}
 
                         <!-- Envia para a url noticia-full junto da PK da notícia -->
@@ -126,7 +130,7 @@
                     </div>
 
                     {% empty %} <!-- Caso não hajam notícias cadastradas -->
-                        <h2 class="mb-3">Nenhuma notícia cadastrada.</h2>
+                        <h2 class="mb-3">Nenhuma notícia publicada no momento.</h2>
                 {% endfor %} 
 
                 <!-- Layout card noticia -->

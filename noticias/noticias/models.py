@@ -7,7 +7,7 @@ class Noticia(models.Model):
     data = models.DateField() # Data da notícia
     fonte = models.CharField(max_length=300) # Fonte de onde a notícia foi tirada
     texto = models.TextField() # Texto da notícia
-    visibilidade = models.BooleanField(
+    publicada = models.BooleanField(
         default=False, 
         verbose_name="Publicada",
         help_text="Marque para que a notícia fique visível para o público."
