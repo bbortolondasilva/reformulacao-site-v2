@@ -1,17 +1,24 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Max, Min
 from django.contrib.auth.decorators import permission_required
-from django.contrib import messages
-from django.views.decorators.http import require_POST
 from .models import Noticia
 from .forms import NoticiaForm
+
+# Define quais notícias o usuário atual pode ver:
+def noticias_visiveis(user):
+    # Quem tem permissão de editar notícias (usuário autorizado) vê todas, inclusive rascunhos:
+    if user.has_perm("noticias.change_noticia"):
+        return Noticia.objects.all()
+
+    # Os demais (visitantes) veem apenas as notícias publicadas:
+    return Noticia.objects.filter(publicada=True)
 
 # Create your views here.
 
 # READ:
 # Listar todas as notícias cadastradas:
 def listar(request):
-    noticias = Noticia.objects.all()
+    noticias = noticias_visiveis(request.user).order_by("-data", "-id") # Apenas as notícias visíveis ao usuário, das mais recentes para as mais antigas.
 
     return render(request, "noticias/lista-noticias.html", {
         "noticias":noticias
@@ -19,12 +26,16 @@ def listar(request):
 
 # Trazer dados de uma notícia específica:
 def noticiaFull(request, idNoticia):
-    noticia = get_object_or_404(Noticia, pk=idNoticia) 
+    # Conjunto de notícias que o usuário atual pode ver:
+    visiveis = noticias_visiveis(request.user)
+
+    # Busca dentro das visíveis. Se for um rascunho e o usuário for visitante, retorna 404:
+    noticia = get_object_or_404(visiveis, pk=idNoticia) 
 
     # Verifica se existe uma próxima notícia:
-    proxima = Noticia.objects.filter(id__gt=idNoticia).exists()
+    proxima = visiveis.filter(id__gt=idNoticia).exists()
     # Verifica se existe uma notícia anterior:
-    anterior = Noticia.objects.filter(id__lt=idNoticia).exists()
+    anterior = visiveis.filter(id__lt=idNoticia).exists()
 
     return render(request, "noticias/noticia-full.html", {
         "noticia": noticia,
@@ -35,10 +46,13 @@ def noticiaFull(request, idNoticia):
 
 # Próxima notícia:
 def proximaNoticia(request, idNoticia):
-    noticia = get_object_or_404(Noticia, pk=idNoticia)
+    # Conjunto de notícias que o usuário atual pode ver:
+    visiveis = noticias_visiveis(request.user)
+
+    noticia = get_object_or_404(visiveis, pk=idNoticia)
 
     # Próximo id no banco de dados:
-    proxima = Noticia.objects.filter(
+    proxima = visiveis.filter(
         id__gt = idNoticia # filtra as noticias com id maior que o idNoticia passado.
     ).order_by("id").first() # ordena de forma crescente e pega o primeiro id da lista.
 
@@ -50,10 +64,13 @@ def proximaNoticia(request, idNoticia):
 
 # Notícia anterior:
 def noticiaAnterior(request, idNoticia):
-    noticia = get_object_or_404(Noticia, pk=idNoticia)
+    # Conjunto de notícias que o usuário atual pode ver:
+    visiveis = noticias_visiveis(request.user)
+
+    noticia = get_object_or_404(visiveis, pk=idNoticia)
 
     # Id anterior no banco de dados:
-    anterior = Noticia.objects.filter(
+    anterior = visiveis.filter(
         id__lt = idNoticia # Filtra as noticias com id menor que o idNoticia passado.
     ).order_by("-id").first() # Ordena de forma decrescente e pega o primeiro id da lista.
 
@@ -134,12 +151,3 @@ def editarNoticia(request, idNoticia):
         "noticia": noticia,
         "form": form,
     })
-
-
-# Mudar a visibilidade de uma noticia:
-@permission_required("noticias.change_noticia")
-
-def visibilidadeNoticia(user):
-    if user.has_perm("noticias.change_noticia"):
-        return Noticia.objects.all()
-    return Noticia.objects.filter(publicada=True)

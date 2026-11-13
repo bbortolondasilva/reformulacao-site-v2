@@ -106,6 +106,10 @@
                     <div class="item-noticia">
                         <img class="imagem-noticia" src="{{ noticia.imagem.url }}" alt="{{ noticia.titulo }}">
 
+                        {% if not noticia.publicada %}
+                            <span class="badge text-bg-warning p-2 mt-1">Não publicada</span>
+                        {% endif %}
+
                         <!-- Envia para a url noticia-full junto da PK da notícia -->
                         <a href="{% url 'noticias:noticia-full' noticia.pk %}">
                             <h2 class="titulo-noticia">{{ noticia.titulo }}</h2>

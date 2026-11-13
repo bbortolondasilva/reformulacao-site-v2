@@ -34,5 +34,9 @@ class NoticiaForm(ModelForm):
                 "class": "form-control w-75 m-auto",
                 "placeholder": "Digite o conteúdo da notícia",
                 "rows": 8,
-            })
+            }),
+
+            "publicada": forms.CheckboxInput(attrs={
+                "class": "form-check-input",
+            }),
         }
