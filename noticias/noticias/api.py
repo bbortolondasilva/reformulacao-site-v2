@@ -54,7 +54,7 @@ class NoticiaViewSet(viewsets.ModelViewSet): # Model view set cria views para op
       correspondente (add, change, delete) — as mesmas usadas nas telas do site.
     """
 
-    queryset = Noticia.objects.all().order_by("-data", "-id") 
+    queryset = Noticia.objects.all().order_by("-data", "-id") # Registros do banco de dados em ordem crescente de data e id.
     serializer_class = NoticiaSerializer
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
     parser_classes = [MultiPartParser, FormParser, JSONParser]
