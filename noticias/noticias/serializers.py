@@ -9,14 +9,14 @@ TAMANHO_MAX_IMAGEM_MB = 5
 TITULO_MIN = 5
 TEXTO_MIN = 20
 
-
+# O serializer faz a conversão e validação dos dados
 class NoticiaSerializer(serializers.ModelSerializer):
     """Converte a Notícia em JSON (e vice-versa) e valida os dados recebidos pela API."""
 
     class Meta:
         model = Noticia
-        fields = ["id", "titulo", "imagem", "data", "fonte", "texto"]
-        read_only_fields = ["id"]
+        fields = ["id", "titulo", "imagem", "data", "fonte", "texto"] # Campos do model
+        read_only_fields = ["id"] # campo apenas de leitura.
         # Mensagens próprias para campos obrigatórios
         extra_kwargs = {
             "titulo": {"error_messages": {"required": "Informe o título da notícia.",
@@ -40,6 +40,7 @@ class NoticiaSerializer(serializers.ModelSerializer):
 
     # ---------- Validações de cada campo ----------
 
+    # Tamanho do título:
     def validate_titulo(self, valor):
         valor = valor.strip()
         if len(valor) < TITULO_MIN:
@@ -48,17 +49,20 @@ class NoticiaSerializer(serializers.ModelSerializer):
             )
         return valor
 
+    # Data maior do que a de hoje:
     def validate_data(self, valor):
         if valor > date.today():
             raise serializers.ValidationError("A data da notícia não pode ser no futuro.")
         return valor
 
+    # Fonte não informada:
     def validate_fonte(self, valor):
         valor = valor.strip()
         if not valor:
             raise serializers.ValidationError("Informe a fonte da notícia.")
         return valor
 
+    # texto menor que o mínimo
     def validate_texto(self, valor):
         valor = valor.strip()
         if len(valor) < TEXTO_MIN:
@@ -67,6 +71,7 @@ class NoticiaSerializer(serializers.ModelSerializer):
             )
         return valor
 
+    # Imagem maior que 1024px por 1024px
     def validate_imagem(self, valor):
         if valor and valor.size > TAMANHO_MAX_IMAGEM_MB * 1024 * 1024:
             raise serializers.ValidationError(

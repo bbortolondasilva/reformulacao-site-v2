@@ -45,7 +45,7 @@ from .serializers import NoticiaSerializer
                     "Exige a permissão `noticias.delete_noticia`.",
     ),
 )
-class NoticiaViewSet(viewsets.ModelViewSet):
+class NoticiaViewSet(viewsets.ModelViewSet): # Model view set cria views para operações crud automaticamente.
     """
     Endpoints de notícias.
 
@@ -54,7 +54,7 @@ class NoticiaViewSet(viewsets.ModelViewSet):
       correspondente (add, change, delete) — as mesmas usadas nas telas do site.
     """
 
-    queryset = Noticia.objects.all().order_by("-data", "-id")
+    queryset = Noticia.objects.all().order_by("-data", "-id") 
     serializer_class = NoticiaSerializer
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
     parser_classes = [MultiPartParser, FormParser, JSONParser]
